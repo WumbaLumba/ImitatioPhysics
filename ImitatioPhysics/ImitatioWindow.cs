@@ -2,7 +2,6 @@
 using OpenTK.Windowing.Common;
 using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;
-using ImGuiNET;
 
 namespace ImitatioPhysics
 {
@@ -17,12 +16,14 @@ namespace ImitatioPhysics
 
         private Renderer _renderer = new Renderer();
 
+        private Texture _texture;
+
         private float[] _positions = new float[]
         {
-            0.5f,  0.5f, // 0
-            0.5f, -0.5f, // 1
-           -0.5f, -0.5f, // 2
-           -0.5f,  0.5f, // 3
+            -0.5f, -0.5f, 0.0f, 0.0f, // 0 bottom-left
+             0.5f, -0.5f, 1.0f, 0.0f, // 1 bottom-right
+             0.5f,  0.5f, 1.0f, 1.0f, // 2 top-right
+            -0.5f,  0.5f, 0.0f, 1.0f  // 3 top-left
         };
 
         private uint[] _indices = new uint[]
@@ -31,9 +32,8 @@ namespace ImitatioPhysics
             2, 3, 0
         };
 
-        private int _location;
-        private float r = 0.0f;
-        private float _increment = 0.05f;
+        private Matrix4 _proj = Matrix4.CreateOrthographicOffCenter(-2.0f, 2.0f, -1.5f, 1.5f, -1.0f, 1.0f);
+
 
         public ImitatioWindow() : base(GameWindowSettings.Default, NativeWindowSettings.Default)
         {
@@ -48,18 +48,30 @@ namespace ImitatioPhysics
 
         protected override void OnLoad()
         {
+            // Enable blending.
+            GL.Enable(EnableCap.Blend);
+            GL.BlendFunc(BlendingFactor.SrcAlpha, BlendingFactor.OneMinusSrcAlpha);
+            
             _vertexArray = new VertexArray();
             _vertexBuffer = new VertexBuffer(_positions, _positions.Length * sizeof(float));
 
             _layout = new VertexBufferLayout();
+            // Add positions.
+            _layout.PushFloat(2);
+            // Add texture coordinates.
             _layout.PushFloat(2);
             _vertexArray.AddBuffer(_vertexBuffer, _layout);
 
             _indexBuffer = new IndexBuffer(_indices, _indices.Length);
 
-            _shader = new Shader("shader.vert", "shader.frag");
+            _shader = new Shader("res/shaders/shader.vert", "res/shaders/shader.frag");
             _shader.Bind();
             _shader.SetUniform4("u_Color", 0.2f, 0.3f, 0.8f, 1.0f);
+            _shader.SetUniformMat4("u_MVP", ref _proj);
+
+            _texture = new Texture("res/textures/eu.png");
+            _texture.Bind(0);
+            _shader.SetUniform1("u_Texture", 0);
 
             _vertexArray.Unbind();
             _shader.Unbind();
@@ -81,17 +93,11 @@ namespace ImitatioPhysics
             _renderer.Clear();
 
             _shader.Bind();
-            _shader.SetUniform4("u_Color", r, 0.3f, 0.8f, 1.0f);
 
             _vertexArray.Bind();
             _indexBuffer.Bind();
 
             _renderer.Draw(ref _vertexArray, ref _indexBuffer, ref _shader);
-
-            if (r > 1.0f) _increment = -0.05f;
-            else if (r < 0.0f) _increment = 0.05f;
-
-            r += _increment;
             
             Context.SwapBuffers();
             base.OnRenderFrame(e);

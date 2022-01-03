@@ -1,4 +1,5 @@
 ﻿using OpenTK.Graphics.OpenGL;
+using OpenTK.Mathematics;
 
 namespace ImitatioPhysics
 {
@@ -70,9 +71,19 @@ namespace ImitatioPhysics
             GL.UseProgram(0);
         }
 
+        public void SetUniform1(string name, double value)
+        {
+            GL.Uniform1(GetUniformLocation(name), value);
+        }
+
         public void SetUniform4(string name, float f0, float f1, float f2, float f3)
         {
             GL.Uniform4(GetUniformLocation(name), f0, f1, f2, f3);
+        }
+
+        public void SetUniformMat4(string name, ref Matrix4 mat4)
+        {
+            GL.UniformMatrix4(GetUniformLocation(name), false, ref mat4);
         }
 
         private int GetUniformLocation(string name)
