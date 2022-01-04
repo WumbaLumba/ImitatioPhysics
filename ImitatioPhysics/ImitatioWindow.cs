@@ -2,6 +2,7 @@
 using OpenTK.Windowing.Common;
 using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;
+using ImGuiNET;
 
 namespace ImitatioPhysics
 {
@@ -20,10 +21,10 @@ namespace ImitatioPhysics
 
         private float[] _positions = new float[]
         {
-            -0.5f, -0.5f, 0.0f, 0.0f, // 0 bottom-left
-             0.5f, -0.5f, 1.0f, 0.0f, // 1 bottom-right
-             0.5f,  0.5f, 1.0f, 1.0f, // 2 top-right
-            -0.5f,  0.5f, 0.0f, 1.0f  // 3 top-left
+             100.0f, 100.0f, 0.0f, 0.0f, // 0 bottom-left
+             200.5f, 100.0f, 1.0f, 0.0f, // 1 bottom-right
+             200.0f, 200.0f, 1.0f, 1.0f, // 2 top-right
+             100.0f, 200.0f, 0.0f, 1.0f  // 3 top-left
         };
 
         private uint[] _indices = new uint[]
@@ -32,11 +33,21 @@ namespace ImitatioPhysics
             2, 3, 0
         };
 
-        private Matrix4 _proj = Matrix4.CreateOrthographicOffCenter(-2.0f, 2.0f, -1.5f, 1.5f, -1.0f, 1.0f);
+        private static Matrix4 _proj = Matrix4.CreateOrthographicOffCenter(0.0f, 960.0f,    // left -> right
+                                                                           0.0f, 540.0f,    // bottom -> top
+                                                                          -1.0f,   1.0f);   // far -> near
 
+        private static Matrix4 _view = Matrix4.CreateTranslation(0.0f, 0.0f, 0.0f);
 
-        public ImitatioWindow() : base(GameWindowSettings.Default, NativeWindowSettings.Default)
+        private static Matrix4 _model = Matrix4.CreateTranslation(200, 200, 0);
+        //private static Matrix4 matRot = Matrix4.CreateRotationZ(MathHelper.DegreesToRadians(-90.0f));
+
+        private static Matrix4 _mvp = _model * _view * _proj; 
+
+        public ImitatioWindow(int width, int height, string title) : base(GameWindowSettings.Default, NativeWindowSettings.Default)
         {
+            this.Title = title;
+            this.Size = new Vector2i(width, height);
         }
 
         protected override void OnResize(ResizeEventArgs e)
@@ -48,7 +59,7 @@ namespace ImitatioPhysics
 
         protected override void OnLoad()
         {
-            // Enable blending.
+            // For transparent objects.
             GL.Enable(EnableCap.Blend);
             GL.BlendFunc(BlendingFactor.SrcAlpha, BlendingFactor.OneMinusSrcAlpha);
             
@@ -66,8 +77,8 @@ namespace ImitatioPhysics
 
             _shader = new Shader("res/shaders/shader.vert", "res/shaders/shader.frag");
             _shader.Bind();
-            _shader.SetUniform4("u_Color", 0.2f, 0.3f, 0.8f, 1.0f);
-            _shader.SetUniformMat4("u_MVP", ref _proj);
+            //_shader.SetUniform4("u_Color", 0.2f, 0.3f, 0.8f, 1.0f);
+            _shader.SetUniformMat4("u_MVP", ref _mvp);
 
             _texture = new Texture("res/textures/eu.png");
             _texture.Bind(0);
@@ -77,6 +88,7 @@ namespace ImitatioPhysics
             _shader.Unbind();
             _vertexArray.Unbind();
             _indexBuffer.UnBind();
+
 
             base.OnLoad();
         }
