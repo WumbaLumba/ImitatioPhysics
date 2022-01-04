@@ -11,6 +11,12 @@
     <PackageReference Include="ImGui.NET" Version="1.78.0" />
     <PackageReference Include="OpenTK" Version="4.6.7" />
     <PackageReference Include="SixLabors.ImageSharp" Version="1.0.4" />
+    <PackageReference Include="System.Drawing.Common" Version="6.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="src\imgui\" />
+    <Folder Include="src\physics\" />
   </ItemGroup>
 
 </Project>

@@ -4,13 +4,14 @@ namespace ImitatioPhysics
 {
     class VertexBuffer
     {
+        // buffer handle
         private int _rendererID;
         
         public VertexBuffer(float[] data, int size)
         {
             _rendererID = GL.GenBuffer();
-
             Bind();
+
             GL.BufferData(BufferTarget.ArrayBuffer, size, data, BufferUsageHint.StaticDraw);
         }
 

@@ -5,49 +5,59 @@ namespace ImitatioPhysics
 {
     class Shader
     {
-        private int _renderedID;
-        private string _vertexPath, _fragmentPath;
+        // shader handle
+        private int _rendererID;
+        private string _vertexPath, _fragmentPath; // for debugging
 
+        // Create program with specified source code for shaders.
         public Shader(string vertexPath, string fragmentPath)
         {
             _vertexPath = vertexPath;
             _fragmentPath = fragmentPath;
 
-            string vertexShaderSource;
+            // Read source code file and store it as string.
 
+            string vertexShaderSource;
             using (StreamReader reader = new StreamReader(vertexPath))
             {
                 vertexShaderSource = reader.ReadToEnd();
             }
 
             string fragmentShaderSource;
-
             using (StreamReader reader = new StreamReader(fragmentPath))
             {
                 fragmentShaderSource = reader.ReadToEnd();
             }
 
-            _renderedID = CreateShader(vertexShaderSource, fragmentShaderSource);
+            _rendererID = CreateShader(vertexShaderSource, fragmentShaderSource);
         }
 
         // Compile source code and return ID
         private int CompileShader(ShaderType type, string source)
         {
-            int id = GL.CreateShader(type);
-            GL.ShaderSource(id, source);
-            GL.CompileShader(id);
+            // shader handle
+            int shaderID = GL.CreateShader(type);
 
-            string infoLogVert = GL.GetShaderInfoLog(id);
-            if (infoLogVert != System.String.Empty)
-                Console.WriteLine(infoLogVert);
+            GL.ShaderSource(shaderID, source);
+            GL.CompileShader(shaderID);
 
-            return id;
+            // Check for errors in source code.
+            string infoLogShader = GL.GetShaderInfoLog(shaderID);
+            if (infoLogShader != System.String.Empty)
+                Console.WriteLine(infoLogShader);
+
+            return shaderID;
         }
 
         private int CreateShader(string vertexShader, string fragmentShader)
         {
+            // program handle
             int program = GL.CreateProgram();
+
+            // vertex shader handle
             int vs = CompileShader(ShaderType.VertexShader, vertexShader);
+
+            // fragment shader handle
             int fs = CompileShader(ShaderType.FragmentShader, fragmentShader);
 
             GL.AttachShader(program, vs);
@@ -63,7 +73,7 @@ namespace ImitatioPhysics
 
         public void Bind()
         {
-            GL.UseProgram(_renderedID);
+            GL.UseProgram(_rendererID);
         }
 
         public void Unbind()
@@ -88,15 +98,18 @@ namespace ImitatioPhysics
 
         private int GetUniformLocation(string name)
         {
-            int location = GL.GetUniformLocation(_renderedID, name);
+            int location = GL.GetUniformLocation(_rendererID, name);
+            
+            // Print error if uniform doesn't exist in shader.
             if (location == -1)
                 Console.WriteLine($"Uniform {name} does not exist.");
+
             return location;
         }
 
         ~Shader()
         {
-            GL.DeleteProgram(_renderedID);
+            GL.DeleteProgram(_rendererID);
         }
     }
 }

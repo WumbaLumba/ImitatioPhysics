@@ -1,10 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "sFQ3WaFeE1gcdDwq/ZQzGd0UOy4Jxnuj6w/YTFn25I8QnXsAlWD4lrpuvMzTfVHi9qXzx0zxjwkf9DmqtB2V2g==",
+  "dgSpecHash": "uCZsEUwfgNpdOQuvnDsEF+iT+juhCK0xXGfyTT9qQNpH/Ut6d7F5mwVEgOQRMMMiFPq+mMiTcysY1XN7lNTZJA==",
   "success": true,
   "projectFilePath": "C:\\Users\\User\\source\\repos\\ImitatioPhysics\\ImitatioPhysics\\ImitatioPhysics.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\User\\.nuget\\packages\\imgui.net\\1.78.0\\imgui.net.1.78.0.nupkg.sha512",
+    "C:\\Users\\User\\.nuget\\packages\\microsoft.win32.systemevents\\6.0.0\\microsoft.win32.systemevents.6.0.0.nupkg.sha512",
     "C:\\Users\\User\\.nuget\\packages\\opentk\\4.6.7\\opentk.4.6.7.nupkg.sha512",
     "C:\\Users\\User\\.nuget\\packages\\opentk.compute\\4.6.7\\opentk.compute.4.6.7.nupkg.sha512",
     "C:\\Users\\User\\.nuget\\packages\\opentk.core\\4.6.7\\opentk.core.4.6.7.nupkg.sha512",
@@ -18,6 +19,7 @@
     "C:\\Users\\User\\.nuget\\packages\\opentk.windowing.graphicslibraryframework\\4.6.7\\opentk.windowing.graphicslibraryframework.4.6.7.nupkg.sha512",
     "C:\\Users\\User\\.nuget\\packages\\sixlabors.imagesharp\\1.0.4\\sixlabors.imagesharp.1.0.4.nupkg.sha512",
     "C:\\Users\\User\\.nuget\\packages\\system.buffers\\4.4.0\\system.buffers.4.4.0.nupkg.sha512",
+    "C:\\Users\\User\\.nuget\\packages\\system.drawing.common\\6.0.0\\system.drawing.common.6.0.0.nupkg.sha512",
     "C:\\Users\\User\\.nuget\\packages\\system.numerics.vectors\\4.4.0\\system.numerics.vectors.4.4.0.nupkg.sha512",
     "C:\\Users\\User\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\5.0.0\\system.runtime.compilerservices.unsafe.5.0.0.nupkg.sha512"
   ],

@@ -4,7 +4,10 @@ namespace ImitatioPhysics
 {
     class IndexBuffer
     {
+        // index buffer handle
         private int _rendererID;
+
+        // no. elements in buffer
         private int _count;
 
         public IndexBuffer(uint[] data, int count)

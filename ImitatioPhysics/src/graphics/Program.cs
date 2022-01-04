@@ -4,7 +4,7 @@
     {
         static void Main(string[] args)
         {
-            ImitatioWindow window = new ImitatioWindow(960, 540, "ImitatioPhysics");
+            ImitatioWindow window = new ImitatioWindow();
             window.Run();
         }
     }
