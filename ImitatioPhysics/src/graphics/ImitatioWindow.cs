@@ -107,8 +107,8 @@ namespace ImitatioPhysics
             _particle.Update((float)e.Time);
             _shader.Bind();
             
-            // nu calculeaza matricea iar you dumbass
-            // _mvp = _model * _view * _proj
+            // Solved?
+            _mvp = _model * _view * _proj;
             _shader.SetUniformMat4("u_MVP", ref _mvp);
             _shader.SetUniform4("u_Color", _sim.SquareColor.X, _sim.SquareColor.Y, _sim.SquareColor.Z, _sim.SquareColor.W);
 
