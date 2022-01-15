@@ -103,13 +103,11 @@ namespace ImitatioPhysics
             _sim.OnImGuiRender();
 
             // Set new colour using slider.
-            // TODO: Move object on screen in real time.
             _particle.Update((float)e.Time);
             _shader.Bind();
             
-            // Solved? Nope.
-            // Doesn't update model matrix when the position of the particle is updated.
-            //_model = Matrix4.CreateTranslation(_particle.Positon);
+            //
+            _model = Matrix4.CreateTranslation(_particle.Positon);
             _mvp = _model * _view * _proj;
             _shader.SetUniformMat4("u_MVP", ref _mvp);
             _shader.SetUniform4("u_Color", _sim.SquareColor.X, _sim.SquareColor.Y, _sim.SquareColor.Z, _sim.SquareColor.W);

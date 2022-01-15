@@ -12,7 +12,12 @@ namespace ImitatioPhysics
             _rendererID = GL.GenBuffer();
             Bind();
 
-            GL.BufferData(BufferTarget.ArrayBuffer, size, data, BufferUsageHint.StaticDraw);
+            GL.BufferData(BufferTarget.ArrayBuffer, size, data, BufferUsageHint.DynamicDraw);
+        }
+
+        public void UpdateData()
+        {
+
         }
 
         public void Bind()

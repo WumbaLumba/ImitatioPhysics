@@ -11,11 +11,13 @@ namespace physics
         public Vector3 Velocity { get; set; }
         public Vector3 Acceleration { get; set; }
 
+        private Vector3 _gravAcc = new Vector3(0.0f, 9.81f, 0.0f);
+
         public Particle(Vector3 position)
         {
             Positon = position;
-            Velocity = (10.0f, 0.0f, 0.0f);
-            Acceleration = (0.0f, 0.0f, 0.0f);
+            Velocity = (0.0f, 0.0f, 0.0f);
+            Acceleration = _gravAcc;
         }
 
         // Set mass using the inverse.
@@ -32,8 +34,6 @@ namespace physics
                 _damping = damping;
         }
 
-
-        // TODO: link duration to time between frame.
         // Integrate initial velocity and acceleration to update current position and velocity.
         public void Update(float dt)
         {
