@@ -2,7 +2,7 @@
 
 namespace ImitatioPhysics
 {
-    class Quad
+    class Quad : Shape
     {
 
 
