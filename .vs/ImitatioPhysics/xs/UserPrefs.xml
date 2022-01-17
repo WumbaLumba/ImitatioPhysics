@@ -1,0 +1,32 @@
+﻿<Properties StartupConfiguration="{AFA6B9D0-6E31-41D1-B076-7BD978F7C756}|Default">
+  <MonoDevelop.Ide.ItemProperties.ImitatioPhysics PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="ImitatioPhysics/src/graphics/shapes/Shape.cs">
+    <Files>
+      <File FileName="ImitatioPhysics/src/graphics/shapes/Shape.cs" Line="1" Column="1" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="ImitatioPhysics" expanded="True">
+            <Node name="ImitatioPhysics" expanded="True">
+              <Node name="src" expanded="True">
+                <Node name="graphics" expanded="True">
+                  <Node name="shapes" expanded="True">
+                    <Node name="Shape.cs" selected="True" />
+                  </Node>
+                </Node>
+                <Node name="simulations" expanded="True" />
+              </Node>
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+</Properties>
