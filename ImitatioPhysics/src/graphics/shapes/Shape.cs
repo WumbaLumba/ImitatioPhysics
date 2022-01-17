@@ -1,4 +1,5 @@
 ﻿using OpenTK.Mathematics;
+using System.Collections.Generic;
 
 namespace ImitatioPhysics
 {
@@ -14,8 +15,18 @@ namespace ImitatioPhysics
     {
         private VertexArray _vertexArray;
         private VertexBuffer _vertexBuffer;
+
+        private List<Vertex> _vertices = new List<Vertex>();
+        private float[] _verticesF = new float[1000];
+
         public Shape()
         {
+            // Some way of adding data
+            /*foreach (Vertex element in _vertices)
+            {
+                for 
+            }*/
+
             _vertexArray = new VertexArray();
             // Not sure if this will work.
             unsafe
