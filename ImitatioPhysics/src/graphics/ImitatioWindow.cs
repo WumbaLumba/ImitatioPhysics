@@ -22,10 +22,8 @@ namespace ImitatioPhysics
         private Renderer _renderer = new Renderer();
         //private Texture _texture;
 
-        private Quad _quad = new Quad(100.0f, 100.0f);
-
         private static physics.Particle _particle = new physics.Particle(new Vector3(100, 100, 0));
-        
+
         private float[] _positions = new float[]
         {
              100.0f, 100.0f,  // 0 bottom-left
@@ -40,6 +38,8 @@ namespace ImitatioPhysics
             2, 3, 0
         };
 
+        private Quad _quad = new Quad(100.0f, 100.0f);
+
         private static Matrix4 _proj = Matrix4.CreateOrthographicOffCenter(0.0f, 960.0f,    // left -> right
                                                                            0.0f, 540.0f,    // bottom -> top
                                                                           -1.0f, 1.0f);   // far -> near
@@ -47,10 +47,9 @@ namespace ImitatioPhysics
         // Modify view and translation here:
         private static Matrix4 _view = Matrix4.CreateTranslation(0.0f, 0.0f, 0.0f);
         private static Vector3 _translation = new Vector3(0.0f, 0.0f, 0.0f);
-
-
+        
         private static Matrix4 _model = Matrix4.CreateTranslation(_particle.Positon);
-
+        
         private static Matrix4 _changePos = Matrix4.CreateTranslation(_sim.Position.X, _sim.Position.Y, _sim.Position.Z);
 
         private static Matrix4 _mvp = (_model * _changePos) * _view * _proj;
@@ -65,6 +64,7 @@ namespace ImitatioPhysics
         {
             base.OnLoad();
 
+            //_sim = new EmptySimulation();
             _controller = new ImGuiController(ClientSize.X, ClientSize.Y);
 
             // Enable blending for transparent objects.
@@ -73,7 +73,7 @@ namespace ImitatioPhysics
             GL.BlendFunc(BlendingFactor.SrcAlpha, BlendingFactor.OneMinusSrcAlpha);
 
             _vertexArray = new VertexArray();
-            _vertexBuffer = new VertexBuffer(_positions, _positions.Length * sizeof(float));
+            _vertexBuffer = new VertexBuffer(_quad.GetPositions(), _quad.GetPositions().Length * sizeof(float));
 
             _layout = new VertexBufferLayout();
 
@@ -82,7 +82,7 @@ namespace ImitatioPhysics
 
             _vertexArray.AddBuffer(_vertexBuffer, _layout);
 
-            _indexBuffer = new IndexBuffer(_indices, _indices.Length); 
+            _indexBuffer = new IndexBuffer(_quad.GetIndices(), _quad.GetIndices().Length);
 
             _shader = new Shader("res/shaders/shader.vert", "res/shaders/shader.frag");
             _shader.Bind();

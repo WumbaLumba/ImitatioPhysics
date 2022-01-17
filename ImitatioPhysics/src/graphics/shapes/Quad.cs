@@ -26,6 +26,8 @@ namespace ImitatioPhysics
         {
             _width = width;
             _height = height;
+
+            _centerCoord = new Vector3(0.0f, 0.0f, 0.0f);   
         }
 
         public void SetCenterCoord(Vector3 centerCoord) => _centerCoord = centerCoord;
