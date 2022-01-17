@@ -30,6 +30,10 @@ namespace ImitatioPhysics
 
         public void SetCenterCoord(Vector3 centerCoord) => _centerCoord = centerCoord;
 
+        public float[] GetPositions() => _positions;
+
+        public uint[] GetIndices() => _indices;
+
         public void SetSize(float width, float height)
         {
             _width = width;

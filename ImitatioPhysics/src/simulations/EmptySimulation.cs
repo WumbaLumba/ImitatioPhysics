@@ -12,13 +12,13 @@ namespace Simulations
         private Vector4 _clearColor;
         public Vector4 SquareColor;
 
-        public float PosX;
-        public float PosY;
+        public Vector3 Position;
 
         public EmptySimulation()
         {
             _clearColor = new Vector4(0.016f, 0.027f, 0.074f, 1.0f);
             SquareColor = new Vector4(1.0f, 1.0f, 1.0f, 1.0f);
+            Position = new Vector3(0.0f, 0.0f, 0.0f);
         }
 
         public void AddShape(Shape shape)
@@ -42,9 +42,8 @@ namespace Simulations
         {
             ImGui.ColorEdit4("Background Colour", ref _clearColor);
             ImGui.ColorEdit4("Square Colour", ref SquareColor);
-            ImGui.SliderFloat("X: ", ref PosX, 0.0f, 960.0f);
-            ImGui.SliderFloat("Y: ", ref PosY, 0.0f, 540.0f);
-
+            ImGui.SliderFloat("X Coordinate", ref Position.X, 0.0f, 960.0f);
+            ImGui.SliderFloat("Y Coordinate", ref Position.Y, 0.0f, 540.0f);
         }
 
     }
