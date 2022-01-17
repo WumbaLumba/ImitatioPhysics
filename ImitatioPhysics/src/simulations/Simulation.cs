@@ -9,6 +9,10 @@ namespace Simulations
 
         }
 
+
+        public virtual void OnLoad()
+        { }
+
         public virtual void OnUpdate(float dt)
         { }
 

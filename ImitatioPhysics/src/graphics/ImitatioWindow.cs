@@ -21,14 +21,14 @@ namespace ImitatioPhysics
         private Renderer _renderer = new Renderer();
         //private Texture _texture;
 
-        private static physics.Particle _particle = new physics.Particle(new Vector3(100, 100, 0));
+        private static physics.Particle _particle = new physics.Particle(new Vector3(0, 0, 0));
         
         private float[] _positions = new float[]
         {
-             100.0f, 100.0f,  // 0 bottom-left
-             200.0f, 100.0f,  // 1 bottom-right
-             200.0f, 200.0f,  // 2 top-right
-             100.0f, 200.0f,  // 3 top-left
+               0.0f,   0.0f,  // 0 bottom-left
+             100.0f,   0.0f,  // 1 bottom-right
+             100.0f, 100.0f,  // 2 top-right
+               0.0f, 100.0f,  // 3 top-left
         };
 
         private uint[] _indices = new uint[]
@@ -43,12 +43,11 @@ namespace ImitatioPhysics
 
         // Modify view and translation here:
         private static Matrix4 _view = Matrix4.CreateTranslation(0.0f, 0.0f, 0.0f);
-        private static Vector3 _translation = new Vector3(0.0f, 0.0f, 0.0f);
-
-
-        private static Matrix4 _model = Matrix4.CreateTranslation(_particle.Positon);
-
+        private static Matrix4 _model = Matrix4.CreateTranslation(_particle.Position);
         private static Matrix4 _mvp = _model * _view * _proj;
+
+        // Update later
+        private bool _inBound = true;
 
         public ImitatioWindow() : base(GameWindowSettings.Default, new NativeWindowSettings() { Size = new Vector2i(960, 540) })
         {
@@ -61,7 +60,6 @@ namespace ImitatioPhysics
             base.OnLoad();
 
             _controller = new ImGuiController(ClientSize.X, ClientSize.Y);
-
             // Enable blending for transparent objects.
             // Used previously to load pngs properly.
             GL.Enable(EnableCap.Blend);
@@ -102,15 +100,24 @@ namespace ImitatioPhysics
             _sim.OnRender();
             _sim.OnImGuiRender();
 
-            // Set new colour using slider.
-            _particle.Update((float)e.Time);
+            if(_sim.IsRunning && _inBound)
+            {
+                _particle.Update((float)e.Time);
+                _model = Matrix4.CreateTranslation(_particle.Position);
+            }
+
+            else
+            {
+                _particle.Position = (_sim.Position.X, _sim.Position.Y, _sim.Position.Z);
+            }
+            
             _shader.Bind();
 
-            //
-            _model = Matrix4.CreateTranslation(_particle.Positon);
-
+            
+            _model = Matrix4.CreateTranslation(_particle.Position);
 
             _mvp = _model * _view * _proj;
+
             _shader.SetUniformMat4("u_MVP", ref _mvp);
             _shader.SetUniform4("u_Color", _sim.SquareColor.X, _sim.SquareColor.Y, _sim.SquareColor.Z, _sim.SquareColor.W);
 

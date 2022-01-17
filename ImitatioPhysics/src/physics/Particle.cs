@@ -7,15 +7,15 @@ namespace physics
     class Particle
     {
         protected float _massReciprocal, _damping  = 1.0f;
-        public Vector3 Positon { get; set; }
+        public Vector3 Position { get; set; }
         public Vector3 Velocity { get; set; }
         public Vector3 Acceleration { get; set; }
 
-        private Vector3 _gravAcc = new Vector3(0.0f, 9.81f, 0.0f);
+        private Vector3 _gravAcc = new Vector3(0.0f, -37000f, 0.0f);
 
         public Particle(Vector3 position)
         {
-            Positon = position;
+            Position = position;
             Velocity = (0.0f, 0.0f, 0.0f);
             Acceleration = _gravAcc;
         }
@@ -37,7 +37,7 @@ namespace physics
         // Integrate initial velocity and acceleration to update current position and velocity.
         public void Update(float dt)
         {
-            Positon += (Velocity * _damping  * dt) + (Acceleration * 0.5f * dt * dt);
+            Position += (Velocity * _damping  * dt) + (Acceleration * 0.5f * dt * dt);
             Velocity += Acceleration * dt;
         }
     }
