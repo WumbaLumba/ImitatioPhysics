@@ -1,17 +1,17 @@
 ﻿<Properties StartupConfiguration="{AFA6B9D0-6E31-41D1-B076-7BD978F7C756}|Default">
   <MonoDevelop.Ide.ItemProperties.ImitatioPhysics PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="ImitatioPhysics/src/graphics/ImitatioWindow.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="ImitatioPhysics/src/graphics/shapes/Shape.cs">
     <Files>
       <File FileName="ImitatioPhysics/src/graphics/shapes/Shape.cs" Line="28" Column="16" />
-      <File FileName="ImitatioPhysics/src/graphics/Texture.cs" Line="35" Column="17" />
+      <File FileName="ImitatioPhysics/src/graphics/Texture.cs" />
       <File FileName="ImitatioPhysics/src/graphics/ImitatioWindow.cs" Line="14" Column="38" />
-      <File FileName="ImitatioPhysics/src/graphics/shapes/Quad.cs" Line="24" Column="1" />
-      <File FileName="ImitatioPhysics/src/simulations/EmptySimulation.cs" Line="26" Column="32" />
-      <File FileName="ImitatioPhysics/src/graphics/Shader.cs" Line="4" Column="17" />
-      <File FileName="ImitatioPhysics/bin/Debug/net6.0/res/shaders/shader.frag" Line="1" Column="1" />
-      <File FileName="ImitatioPhysics/bin/Debug/net6.0/res/shaders/shader.vert" Line="8" Column="36" />
-      <File FileName="ImitatioPhysics/src/simulations/Simulation.cs" Line="1" Column="1" />
-      <File FileName="ImitatioPhysics/src/graphics/VertexBuffer.cs" Line="1" Column="1" />
+      <File FileName="ImitatioPhysics/src/graphics/shapes/Quad.cs" />
+      <File FileName="ImitatioPhysics/src/simulations/EmptySimulation.cs" />
+      <File FileName="ImitatioPhysics/src/graphics/Shader.cs" />
+      <File FileName="ImitatioPhysics/bin/Debug/net6.0/res/shaders/shader.frag" />
+      <File FileName="ImitatioPhysics/bin/Debug/net6.0/res/shaders/shader.vert" />
+      <File FileName="ImitatioPhysics/src/simulations/Simulation.cs" />
+      <File FileName="ImitatioPhysics/src/graphics/VertexBuffer.cs" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -20,8 +20,9 @@
             <Node name="ImitatioPhysics" expanded="True">
               <Node name="src" expanded="True">
                 <Node name="graphics" expanded="True">
-                  <Node name="shapes" expanded="True" />
-                  <Node name="ImitatioWindow.cs" selected="True" />
+                  <Node name="shapes" expanded="True">
+                    <Node name="Shape.cs" selected="True" />
+                  </Node>
                 </Node>
                 <Node name="imgui" expanded="True" />
                 <Node name="physics" expanded="True" />
