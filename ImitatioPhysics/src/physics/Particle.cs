@@ -38,7 +38,6 @@ namespace physics
             Position += (Velocity * _damping  * dt) + (Acceleration * 0.5f * dt * dt);
             Velocity += Acceleration * dt;
         }
-
     }
 }
 
