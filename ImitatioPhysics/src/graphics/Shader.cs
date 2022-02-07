@@ -43,7 +43,7 @@ namespace ImitatioPhysics
 
             // Check for errors in source code.
             string infoLogShader = GL.GetShaderInfoLog(shaderID);
-            if (infoLogShader != System.String.Empty)
+            if (infoLogShader != string.Empty)
                 Console.WriteLine(infoLogShader);
 
             return shaderID;

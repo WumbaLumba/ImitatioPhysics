@@ -1,6 +1,4 @@
-﻿using System;
-using OpenTK.Mathematics;
-
+﻿using OpenTK.Mathematics;
 
 namespace physics
 {
@@ -11,7 +9,7 @@ namespace physics
         public Vector3 Velocity { get; set; }
         public Vector3 Acceleration { get; set; }
 
-        private Vector3 _gravAcc = new Vector3(0.0f, -37000f, 0.0f);
+        private Vector3 _gravAcc = new Vector3(0.0f, -9.81f / 0.0002645833f, 0.0f);
 
         public Particle(Vector3 position)
         {
@@ -40,6 +38,7 @@ namespace physics
             Position += (Velocity * _damping  * dt) + (Acceleration * 0.5f * dt * dt);
             Velocity += Acceleration * dt;
         }
+
     }
 }
 

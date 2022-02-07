@@ -22,7 +22,7 @@ namespace ImitatioPhysics
         //private Texture _texture;
 
         private static physics.Particle _particle = new physics.Particle(new Vector3(0, 0, 0));
-        
+
         private float[] _positions = new float[]
         {
                0.0f,   0.0f,  // 0 bottom-left
@@ -39,9 +39,9 @@ namespace ImitatioPhysics
 
         private static Matrix4 _proj = Matrix4.CreateOrthographicOffCenter(0.0f, 960.0f,    // left -> right
                                                                            0.0f, 540.0f,    // bottom -> top
-                                                                          -1.0f, 1.0f);   // far -> near
+                                                                          -1.0f, 1.0f);     // far -> near
 
-        // Modify view and translation here:
+        // Modify view to add camera here:
         private static Matrix4 _view = Matrix4.CreateTranslation(0.0f, 0.0f, 0.0f);
         private static Matrix4 _model = Matrix4.CreateTranslation(_particle.Position);
         private static Matrix4 _mvp = _model * _view * _proj;
@@ -62,8 +62,8 @@ namespace ImitatioPhysics
             _controller = new ImGuiController(ClientSize.X, ClientSize.Y);
             // Enable blending for transparent objects.
             // Used previously to load pngs properly.
-            GL.Enable(EnableCap.Blend);
-            GL.BlendFunc(BlendingFactor.SrcAlpha, BlendingFactor.OneMinusSrcAlpha);
+            // GL.Enable(EnableCap.Blend);
+            // GL.BlendFunc(BlendingFactor.SrcAlpha, BlendingFactor.OneMinusSrcAlpha);
 
             _vertexArray = new VertexArray();
             _vertexBuffer = new VertexBuffer(_positions, _positions.Length * sizeof(float));
@@ -75,7 +75,7 @@ namespace ImitatioPhysics
 
             _vertexArray.AddBuffer(_vertexBuffer, _layout);
 
-            _indexBuffer = new IndexBuffer(_indices, _indices.Length); 
+            _indexBuffer = new IndexBuffer(_indices, _indices.Length);
 
             _shader = new Shader("res/shaders/shader.vert", "res/shaders/shader.frag");
             _shader.Bind();
@@ -83,7 +83,7 @@ namespace ImitatioPhysics
 
             _vertexArray.Unbind();
             _shader.Unbind();
-            _vertexArray.Unbind();
+            _vertexBuffer.UnBind();
             _indexBuffer.UnBind();
         }
 
@@ -100,7 +100,7 @@ namespace ImitatioPhysics
             _sim.OnRender();
             _sim.OnImGuiRender();
 
-            if(_sim.IsRunning && _inBound)
+            if (_sim.IsRunning)
             {
                 _particle.Update((float)e.Time);
                 _model = Matrix4.CreateTranslation(_particle.Position);
@@ -110,10 +110,10 @@ namespace ImitatioPhysics
             {
                 _particle.Position = (_sim.Position.X, _sim.Position.Y, _sim.Position.Z);
             }
-            
+
             _shader.Bind();
 
-            
+
             _model = Matrix4.CreateTranslation(_particle.Position);
 
             _mvp = _model * _view * _proj;

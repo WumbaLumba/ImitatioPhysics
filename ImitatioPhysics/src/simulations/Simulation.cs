@@ -1,4 +1,6 @@
 ﻿using ImitatioPhysics;
+using ImGuiNET;
+using physics;
 
 namespace Simulations
 {
@@ -20,7 +22,13 @@ namespace Simulations
         { }
 
         public virtual void OnImGuiRender()
-        { }
+        {
+            ImGui.Begin("Simulation Info");
+            {
+                ImGui.Text("Framerate: " + ImGui.GetIO().Framerate);
+            }
+            ImGui.End();
+        }
 
         ~Simulation()
         {

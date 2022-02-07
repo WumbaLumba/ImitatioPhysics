@@ -12,10 +12,10 @@ namespace Simulations
         public Vector3 Position;
 
         public bool IsRunning = false;
+        public bool Reset = false;
 
         public EmptySimulation()
         {
-            
             _clearColor = new Vector4(0.016f, 0.027f, 0.074f, 1.0f);
             SquareColor = new Vector4(1.0f, 1.0f, 1.0f, 1.0f);
             Position = new Vector3(0.0f, 0.0f, 0.0f);
@@ -39,7 +39,7 @@ namespace Simulations
                 if (!IsRunning)
                     IsRunning = ImGui.Button("Run");
                 else
-                    IsRunning = !ImGui.Button("Pause");
+                    IsRunning = !ImGui.Button("Restart");
             }
             ImGui.End();
 
@@ -47,10 +47,10 @@ namespace Simulations
             {
                 ImGui.ColorEdit4("Background Colour", ref _clearColor);
                 ImGui.ColorEdit4("Square Colour", ref SquareColor);
-                if (!IsRunning)
+                if (!IsRunning || Reset)
                 {
-                    ImGui.SliderFloat("X", ref Position.X, 0.0f, 860.0f);
-                    ImGui.SliderFloat("Y", ref Position.Y, 0.0f, 440.0f);
+                    ImGui.SliderFloat("X-axis", ref Position.X, 0.0f, 860.0f);
+                    ImGui.SliderFloat("Y-axis", ref Position.Y, 0.0f, 440.0f);
                 }
             }
             ImGui.End();
@@ -64,6 +64,7 @@ and run the simulation to let it drop.
                 ");
             }
             ImGui.End();
+            base.OnImGuiRender();
 
         }
 
