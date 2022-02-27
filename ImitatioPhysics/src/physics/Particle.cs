@@ -9,7 +9,7 @@ namespace physics
         public Vector3 Velocity { get; set; }
         public Vector3 Acceleration { get; set; }
 
-        private Vector3 _gravAcc = new Vector3(0.0f, -9.81f / 0.0002645833f, 0.0f);
+        private Vector3 _gravAcc = new Vector3(0.0f, -9.81f, 0.0f);
 
         public Particle(Vector3 position)
         {
