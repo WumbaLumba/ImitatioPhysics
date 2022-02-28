@@ -1,6 +1,4 @@
-﻿using ImitatioPhysics;
-using ImGuiNET;
-using physics;
+﻿using ImGuiNET;
 
 namespace Simulations
 {

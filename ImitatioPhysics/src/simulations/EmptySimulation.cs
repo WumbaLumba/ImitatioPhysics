@@ -1,5 +1,4 @@
 ﻿using OpenTK.Graphics.OpenGL;
-using ImitatioPhysics;
 using ImGuiNET;
 using System.Numerics;
 
@@ -37,6 +36,7 @@ namespace Simulations
             ImGui.Begin("Simulation Control");
             {
                 if (!IsRunning)
+                    // Corresponds to the state of the button (e.g. if pressed, then true)
                     IsRunning = ImGui.Button("Run");
                 else
                     IsRunning = !ImGui.Button("Restart");
