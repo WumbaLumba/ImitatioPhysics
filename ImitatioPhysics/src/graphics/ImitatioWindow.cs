@@ -23,6 +23,7 @@ namespace ImitatioPhysics
         {
             base.OnLoad();
 
+            _sim.OnResize(ClientSize.X, ClientSize.Y);
             _controller = new ImGuiController(ClientSize.X, ClientSize.Y);
         }
 
@@ -46,6 +47,7 @@ namespace ImitatioPhysics
             base.OnResize(e);
 
             // Set viewport as size of the window.
+            _sim.OnResize(ClientSize.X, ClientSize.Y);
             GL.Viewport(0, 0, ClientSize.X, ClientSize.Y);
             _controller.WindowResized(ClientSize.X, ClientSize.Y);
         }

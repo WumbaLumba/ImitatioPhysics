@@ -3,6 +3,9 @@ using ImitatioPhysics;
 using ImGuiNET;
 using System.Numerics;
 
+using OpenTK.Windowing.Desktop;
+using OpenTK.Windowing.Common;
+
 namespace Simulations
 {
     class GravitySimulation : Simulation
@@ -10,6 +13,7 @@ namespace Simulations
         private Vector4 _clearColor;
         public Vector4 SquareColor;
         public Vector3 Position;
+        public Vector3 Velocity;
 
         public bool IsRunning = false;
         public bool Reset = false;
@@ -55,6 +59,7 @@ namespace Simulations
             _clearColor = new Vector4(0.016f, 0.027f, 0.074f, 1.0f);
             SquareColor = new Vector4(1.0f, 1.0f, 1.0f, 1.0f);
             Position = new Vector3(0.0f, 0.0f, 0.0f);
+            Velocity = new Vector3(0.0f, 0.0f, 0.0f);
 
             _vertexArray = new VertexArray();
             _vertexBuffer = new VertexBuffer(_positions, _positions.Length * sizeof(float));
@@ -78,6 +83,11 @@ namespace Simulations
             _indexBuffer.UnBind();
         }
 
+        public override void OnResize(float width, float height)
+        {
+            base.OnResize(width, height);
+        }
+
         public override void OnRender()
         {
             GL.ClearColor(_clearColor.X, _clearColor.Y, _clearColor.Z, _clearColor.W);
@@ -85,7 +95,7 @@ namespace Simulations
 
             _shader.Bind();
 
-
+            
             _model = OpenTK.Mathematics.Matrix4.CreateTranslation(_particle.Position);
 
             _mvp = _model * _view * _proj;
@@ -108,14 +118,15 @@ namespace Simulations
 
             if (IsRunning)
             {
-                _particle.Update(dt);
+                _particle.Update(0.001f);
                 _model = OpenTK.Mathematics.Matrix4.CreateTranslation(_particle.Position);
             }
 
             else
             {
                 _particle.Position = (Position.X, Position.Y, Position.Z);
-                _particle.Velocity = (0.0f, 0.0f, 0.0f);
+                _particle.Velocity = (Velocity.X / 0.0002645833f, Velocity.Y / 0.0002645833f, Velocity.Z);
+                //_particle.Velocity = (0.0f, 0.0f, 0.0f);
             }
         }
 
@@ -134,12 +145,18 @@ namespace Simulations
 
             ImGui.Begin("Properties");
             {
+                ImGui.Text("Appearance");
                 ImGui.ColorEdit4("Background Colour", ref _clearColor);
                 ImGui.ColorEdit4("Square Colour", ref SquareColor);
                 if (!IsRunning)
                 {
-                    ImGui.SliderFloat("X-axis", ref Position.X, 0.0f, 860.0f);
-                    ImGui.SliderFloat("Y-axis", ref Position.Y, 0.0f, 440.0f);
+                    ImGui.Text("\nInitial Position");
+                    ImGui.SliderFloat("(P) X-axis", ref Position.X, 0.0f, 860.0f);
+                    ImGui.SliderFloat("(P) Y-axis", ref Position.Y, 0.0f, 440.0f);
+
+                    ImGui.Text("\nInitial Velocity");
+                    ImGui.SliderFloat("(V) X-axis", ref Velocity.X, -5.0f, 5.0f);
+                    ImGui.SliderFloat("(V) Y-axis", ref Velocity.Y, -5.0f, 5.0f);
                 }
             }
             ImGui.End();
@@ -156,7 +173,7 @@ and run the simulation to let it drop.
 
             ImGui.Begin("Simulation Info");
             {
-                ImGui.Text("(VELOCITY)\nX: " + _particle.Velocity.X + "\nY: " + _particle.Velocity.Y);
+                ImGui.Text("(VELOCITY)\nX: " + _particle.Velocity.X * 0.0002645833f + "\nY: " + _particle.Velocity.Y * 0.0002645833f);
             }
             ImGui.End();
 
