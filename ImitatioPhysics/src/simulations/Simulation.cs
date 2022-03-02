@@ -4,11 +4,17 @@ namespace Simulations
 {
     class Simulation
     {
+        protected static float _width, _height;
         public Simulation()
         {
 
         }
 
+        public virtual void OnResize(float width, float height)
+        {
+            _width = width;
+            _height = height;
+        }
 
         public virtual void OnLoad()
         { }
