@@ -1,16 +1,10 @@
-﻿using OpenTK.Graphics.OpenGL;
-using ImitatioPhysics;
-using ImGuiNET;
+﻿using ImGuiNET;
 using System.Numerics;
 
-using OpenTK.Windowing.Desktop;
-using OpenTK.Windowing.Common;
-
-namespace Simulations
+namespace ImitatioPhysics
 {
     class GravitySimulation : Simulation
     {
-        private Vector4 _clearColor;
         public Vector4 SquareColor;
         public Vector3 Position;
         public Vector3 Velocity;
@@ -28,7 +22,10 @@ namespace Simulations
         private Renderer _renderer = new Renderer();
         //private Texture _texture;
 
-        private static physics.Particle _particle = new physics.Particle(new OpenTK.Mathematics.Vector3(0, 0, 0));
+
+        Quad quad = new Quad();
+
+        private static Particle _particle = new Particle(new OpenTK.Mathematics.Vector3(0.0f, 0.0f, 0.0f));
 
         private float[] _positions = new float[]
         {
@@ -54,9 +51,8 @@ namespace Simulations
         private static OpenTK.Mathematics.Matrix4 _model = OpenTK.Mathematics.Matrix4.CreateTranslation(_particle.Position);
         private static OpenTK.Mathematics.Matrix4 _mvp = _model * _view * _proj;
 
-        public GravitySimulation() 
+        public GravitySimulation() : base()
         {
-            _clearColor = new Vector4(0.016f, 0.027f, 0.074f, 1.0f);
             SquareColor = new Vector4(1.0f, 1.0f, 1.0f, 1.0f);
             Position = new Vector3(0.0f, 0.0f, 0.0f);
             Velocity = new Vector3(0.0f, 0.0f, 0.0f);
@@ -81,17 +77,13 @@ namespace Simulations
             _shader.Unbind();
             _vertexBuffer.UnBind();
             _indexBuffer.UnBind();
-        }
 
-        public override void OnResize(float width, float height)
-        {
-            base.OnResize(width, height);
+            
         }
 
         public override void OnRender()
         {
-            GL.ClearColor(_clearColor.X, _clearColor.Y, _clearColor.Z, _clearColor.W);
-            GL.Clear(ClearBufferMask.ColorBufferBit);
+            base.OnRender();
 
             _shader.Bind();
 
@@ -108,6 +100,9 @@ namespace Simulations
 
             // Draw object.
             _renderer.Draw(ref _vertexArray, ref _indexBuffer, ref _shader);
+
+            quad.Render();
+            quad.Move(_particle.Position);
 
             //SwapBuffers();
         }

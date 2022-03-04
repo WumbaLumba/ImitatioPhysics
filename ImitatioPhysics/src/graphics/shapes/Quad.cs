@@ -18,7 +18,7 @@ namespace ImitatioPhysics
             2, 3, 0
         };
 
-        public Quad()
+        public Quad() : base()
         {
             _vertexArray = new VertexArray();
             _vertexBuffer = new VertexBuffer(_positions, _positions.Length * sizeof(float));
@@ -34,7 +34,7 @@ namespace ImitatioPhysics
 
             _shader = new Shader("res/shaders/shader.vert", "res/shaders/shader.frag");
             _shader.Bind();
-            //_shader.SetUniformMat4("u_MVP", ref _mvp);
+            _shader.SetUniformMat4("u_MVP", ref _mvp);
 
             _vertexArray.Unbind();
             _shader.Unbind();
