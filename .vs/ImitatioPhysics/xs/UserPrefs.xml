@@ -2,9 +2,9 @@
   <MonoDevelop.Ide.ItemProperties.ImitatioPhysics PreferredExecutionTarget="MonoDevelop.Default" />
   <MonoDevelop.Ide.Workbench ActiveDocument="ImitatioPhysics/src/graphics/shapes/Shape.cs">
     <Files>
-      <File FileName="ImitatioPhysics/src/graphics/shapes/Shape.cs" Line="28" Column="16" />
+      <File FileName="ImitatioPhysics/src/graphics/shapes/Shape.cs" Line="28" Column="6" />
       <File FileName="ImitatioPhysics/src/graphics/Texture.cs" />
-      <File FileName="ImitatioPhysics/src/graphics/ImitatioWindow.cs" Line="14" Column="38" />
+      <File FileName="ImitatioPhysics/src/graphics/ImitatioWindow.cs" />
       <File FileName="ImitatioPhysics/src/graphics/shapes/Quad.cs" />
       <File FileName="ImitatioPhysics/src/simulations/EmptySimulation.cs" />
       <File FileName="ImitatioPhysics/src/graphics/Shader.cs" />
