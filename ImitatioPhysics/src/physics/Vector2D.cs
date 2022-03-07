@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace physics
+namespace ImitatioPhysics
 {
     // Hold a vector in two-dimensions.
     class Vector2D
