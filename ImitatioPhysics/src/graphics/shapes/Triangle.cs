@@ -5,6 +5,7 @@ namespace ImitatioPhysics.src.graphics.shapes
     {
         public Triangle()
         {
+
         }
     }
 }

@@ -1,30 +1,33 @@
 ﻿<Properties StartupConfiguration="{AFA6B9D0-6E31-41D1-B076-7BD978F7C756}|Default">
   <MonoDevelop.Ide.ItemProperties.ImitatioPhysics PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="ImitatioPhysics/src/graphics/shapes/Triangle.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="ImitatioPhysics/src/graphics/shapes/Quad.cs">
     <Files>
-      <File FileName="ImitatioPhysics/src/graphics/shapes/Shape.cs" Line="20" Column="10" />
+      <File FileName="ImitatioPhysics/src/graphics/shapes/Shape.cs" Line="16" Column="10" />
       <File FileName="ImitatioPhysics/src/graphics/Texture.cs" />
       <File FileName="ImitatioPhysics/src/graphics/ImitatioWindow.cs" />
       <File FileName="ImitatioPhysics/src/graphics/shapes/Quad.cs" Line="42" Column="35" />
-      <File FileName="ImitatioPhysics/src/simulations/EmptySimulation.cs" Line="1" Column="1" />
+      <File FileName="ImitatioPhysics/src/simulations/EmptySimulation.cs" />
       <File FileName="ImitatioPhysics/src/graphics/Shader.cs" />
       <File FileName="ImitatioPhysics/bin/Debug/net6.0/res/shaders/shader.frag" />
       <File FileName="ImitatioPhysics/bin/Debug/net6.0/res/shaders/shader.vert" />
-      <File FileName="ImitatioPhysics/src/simulations/Simulation.cs" Line="1" Column="1" />
+      <File FileName="ImitatioPhysics/src/simulations/Simulation.cs" />
       <File FileName="ImitatioPhysics/src/graphics/VertexBuffer.cs" />
-      <File FileName="ImitatioPhysics/src/physics/Particle.cs" Line="1" Column="1" />
-      <File FileName="ImitatioPhysics/src/simulations/GravitySimulation.cs" Line="101" Column="43" />
-      <File FileName="ImitatioPhysics/src/graphics/shapes/Triangle.cs" Line="1" Column="1" />
+      <File FileName="ImitatioPhysics/src/physics/Particle.cs" />
+      <File FileName="ImitatioPhysics/src/simulations/GravitySimulation.cs" />
+      <File FileName="ImitatioPhysics/src/graphics/shapes/Triangle.cs" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="ImitatioPhysics" expanded="True">
             <Node name="ImitatioPhysics" expanded="True">
+              <Node name="Dependencies" expanded="True">
+                <Node name="PackageDependencies" expanded="True" />
+              </Node>
               <Node name="src" expanded="True">
                 <Node name="graphics" expanded="True">
                   <Node name="shapes" expanded="True">
-                    <Node name="Triangle.cs" selected="True" />
+                    <Node name="Quad.cs" selected="True" />
                   </Node>
                 </Node>
                 <Node name="physics" expanded="True" />

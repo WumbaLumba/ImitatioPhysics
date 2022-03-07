@@ -1,27 +1,19 @@
-﻿using OpenTK.Mathematics;
-
-namespace ImitatioPhysics
+﻿namespace ImitatioPhysics
 {
-    // Maybe add texture coordinates and colour?
-    struct Vertex
-    {
-        public Vector3 Position;
-    }
-
-    // Does it even need a base class?
-    // All code associated with vertices 'n' stuff from ImitatioWindow goes here:
     class Shape
     {
-        private VertexArray _vertexArray;
-        private VertexBuffer _vertexBuffer;
-        public Shape()
+        protected VertexBuffer _vertexBuffer;
+        protected IndexBuffer _indexBuffer;
+        protected VertexArray _vertexArray;
+        protected VertexBufferLayout _layout;
+        
+        protected Shader _shader;
+        protected Renderer _renderer = new Renderer();
+
+        protected Shape()
         {
-            _vertexArray = new VertexArray();
-            // Not sure if this will work.
-            unsafe
-            {
-                _vertexBuffer = new VertexBuffer(new float[0], sizeof(Vertex) * 1000);
-            }
-        }  
+
+        }
+
     }
 }
