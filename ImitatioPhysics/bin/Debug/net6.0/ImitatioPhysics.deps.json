@@ -8,16 +8,16 @@
     ".NETCoreApp,Version=v6.0": {
       "ImitatioPhysics/1.0.0": {
         "dependencies": {
-          "ImGui.NET": "1.87.2",
+          "ImGui.NET": "1.87.3",
           "OpenTK": "4.7.1",
-          "SixLabors.ImageSharp": "1.0.4",
+          "SixLabors.ImageSharp": "2.1.0",
           "System.Drawing.Common": "6.0.0"
         },
         "runtime": {
           "ImitatioPhysics.dll": {}
         }
       },
-      "ImGui.NET/1.87.2": {
+      "ImGui.NET/1.87.3": {
         "dependencies": {
           "System.Buffers": "4.4.0",
           "System.Numerics.Vectors": "4.4.0",
@@ -25,8 +25,8 @@
         },
         "runtime": {
           "lib/net6.0/ImGui.NET.dll": {
-            "assemblyVersion": "1.87.2.0",
-            "fileVersion": "1.87.2.0"
+            "assemblyVersion": "1.87.3.0",
+            "fileVersion": "1.87.3.0"
           }
         },
         "runtimeTargets": {
@@ -52,6 +52,7 @@
           }
         }
       },
+      "Microsoft.NETCore.Platforms/5.0.0": {},
       "Microsoft.Win32.SystemEvents/6.0.0": {
         "runtime": {
           "lib/net6.0/Microsoft.Win32.SystemEvents.dll": {
@@ -202,11 +203,15 @@
           }
         }
       },
-      "SixLabors.ImageSharp/1.0.4": {
+      "SixLabors.ImageSharp/2.1.0": {
+        "dependencies": {
+          "System.Runtime.CompilerServices.Unsafe": "5.0.0",
+          "System.Text.Encoding.CodePages": "5.0.0"
+        },
         "runtime": {
           "lib/netcoreapp3.1/SixLabors.ImageSharp.dll": {
-            "assemblyVersion": "1.0.0.0",
-            "fileVersion": "1.0.4.0"
+            "assemblyVersion": "2.0.0.0",
+            "fileVersion": "2.1.0.0"
           }
         }
       },
@@ -237,7 +242,12 @@
         }
       },
       "System.Numerics.Vectors/4.4.0": {},
-      "System.Runtime.CompilerServices.Unsafe/5.0.0": {}
+      "System.Runtime.CompilerServices.Unsafe/5.0.0": {},
+      "System.Text.Encoding.CodePages/5.0.0": {
+        "dependencies": {
+          "Microsoft.NETCore.Platforms": "5.0.0"
+        }
+      }
     }
   },
   "libraries": {
@@ -246,12 +256,19 @@
       "serviceable": false,
       "sha512": ""
     },
-    "ImGui.NET/1.87.2": {
+    "ImGui.NET/1.87.3": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-R9CmXj/0220nOfKKgxNQwvy5tAnSlfSKNSLaUPe/0vngjDCxgCoxNVgnf3nXbbI80zzwCwatEoEUTVRcxwsqHA==",
-      "path": "imgui.net/1.87.2",
-      "hashPath": "imgui.net.1.87.2.nupkg.sha512"
+      "sha512": "sha512-pYKUrXtvinMZiWToAzGhAGXscPr1B/NVVADbfbBlpl9waaVtB/7q9Zx07HyjivE44f8u1W1L++iwwfrCS3Sw3w==",
+      "path": "imgui.net/1.87.3",
+      "hashPath": "imgui.net.1.87.3.nupkg.sha512"
+    },
+    "Microsoft.NETCore.Platforms/5.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-VyPlqzH2wavqquTcYpkIIAQ6WdenuKoFN0BdYBbCWsclXacSOHNQn66Gt4z5NBqEYW0FAPm5rlvki9ZiCij5xQ==",
+      "path": "microsoft.netcore.platforms/5.0.0",
+      "hashPath": "microsoft.netcore.platforms.5.0.0.nupkg.sha512"
     },
     "Microsoft.Win32.SystemEvents/6.0.0": {
       "type": "package",
@@ -337,12 +354,12 @@
       "path": "opentk.windowing.graphicslibraryframework/4.7.1",
       "hashPath": "opentk.windowing.graphicslibraryframework.4.7.1.nupkg.sha512"
     },
-    "SixLabors.ImageSharp/1.0.4": {
+    "SixLabors.ImageSharp/2.1.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-H2rPiEr2ddBOltOuqRYhpLBAsQXDAhbzMMhhuksnBG2oefup1MXMchALe7yYkKJksNbtxbZHKeM6dn/68I75qw==",
-      "path": "sixlabors.imagesharp/1.0.4",
-      "hashPath": "sixlabors.imagesharp.1.0.4.nupkg.sha512"
+      "sha512": "sha512-H8npUDq3VRagzRsJVxaNoUSMmD+kjAs7sR1Ip85eWbN5c0O1medMw/FiQ32dSNfWz/gVrc+xHs3es9SFlAiNBw==",
+      "path": "sixlabors.imagesharp/2.1.0",
+      "hashPath": "sixlabors.imagesharp.2.1.0.nupkg.sha512"
     },
     "System.Buffers/4.4.0": {
       "type": "package",
@@ -371,6 +388,13 @@
       "sha512": "sha512-ZD9TMpsmYJLrxbbmdvhwt9YEgG5WntEnZ/d1eH8JBX9LBp+Ju8BSBhUGbZMNVHHomWo2KVImJhTDl2hIgw/6MA==",
       "path": "system.runtime.compilerservices.unsafe/5.0.0",
       "hashPath": "system.runtime.compilerservices.unsafe.5.0.0.nupkg.sha512"
+    },
+    "System.Text.Encoding.CodePages/5.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-NyscU59xX6Uo91qvhOs2Ccho3AR2TnZPomo1Z0K6YpyztBPM/A5VbkzOO19sy3A3i1TtEnTxA7bCe3Us+r5MWg==",
+      "path": "system.text.encoding.codepages/5.0.0",
+      "hashPath": "system.text.encoding.codepages.5.0.0.nupkg.sha512"
     }
   }
 }
