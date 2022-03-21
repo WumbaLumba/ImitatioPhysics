@@ -25,6 +25,9 @@ namespace ImitatioPhysics
 
         Quad quad = new Quad();
 
+        private ShapesToRender _shapes = new ShapesToRender();
+        
+
         private static Particle _particle = new Particle(new OpenTK.Mathematics.Vector3(0.0f, 0.0f, 0.0f));
 
         private float[] _positions = new float[]
@@ -53,6 +56,8 @@ namespace ImitatioPhysics
 
         public GravitySimulation() : base()
         {
+            _shapes.AddShape("q1", quad);
+
             SquareColor = new Vector4(1.0f, 1.0f, 1.0f, 1.0f);
             Position = new Vector3(0.0f, 0.0f, 0.0f);
             Velocity = new Vector3(0.0f, 0.0f, 0.0f);
@@ -85,26 +90,8 @@ namespace ImitatioPhysics
         {
             base.OnRender();
 
-            _shader.Bind();
-
-            
-            _model = OpenTK.Mathematics.Matrix4.CreateTranslation(_particle.Position);
-
-            _mvp = _model * _view * _proj;
-
-            _shader.SetUniformMat4("u_MVP", ref _mvp);
-            _shader.SetUniform4("u_Color", SquareColor.X, SquareColor.Y, SquareColor.Z, SquareColor.W);
-
-            _vertexArray.Bind();
-            _indexBuffer.Bind();
-
-            // Draw object.
-            _renderer.Draw(ref _vertexArray, ref _indexBuffer, ref _shader);
-
             quad.Render();
             quad.Move(_particle.Position);
-
-            //SwapBuffers();
         }
 
         public override void OnUpdate(float dt)

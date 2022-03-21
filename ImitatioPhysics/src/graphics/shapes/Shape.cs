@@ -1,48 +1,75 @@
-﻿namespace ImitatioPhysics
+﻿using OpenTK.Mathematics;
+using System.Collections.Generic;
+
+namespace ImitatioPhysics
 {
     class Shape
     {
-<<<<<<< HEAD
-=======
         protected Vector4 _color;
 
         protected static Vector3 _trans = (0.0f, 0.0f, 0.0f);
 
->>>>>>> 64792c41a5bc49a5cd7085fa9b492251bdc0b3d7
+        //protected int _vertNum;
+
         protected VertexBuffer _vertexBuffer;
         protected IndexBuffer _indexBuffer;
         protected VertexArray _vertexArray;
         protected VertexBufferLayout _layout;
-<<<<<<< HEAD
-        
-        protected Shader _shader;
-        protected Renderer _renderer = new Renderer();
 
-        protected Shape()
-        {
-
-        }
-
-=======
+        protected List<float> _positionsShape = new List<float>();
+        protected List<uint> _indicesShape = new List<uint>();
 
         protected Shader _shader;
         protected Renderer _renderer = new Renderer();
 
-        protected static Matrix4 _view =  Matrix4.CreateTranslation(0.0f, 0.0f, 0.0f);
+        protected static Matrix4 _view = Matrix4.CreateTranslation(0.0f, 0.0f, 0.0f);
         protected static Matrix4 _model = Matrix4.CreateTranslation(_trans);
         protected static Matrix4 _mvp;
 
         protected static Matrix4 _proj = Matrix4.CreateOrthographicOffCenter(0.0f, 960.0f,    // left -> right
                                                                              0.0f, 540.0f,    // bottom -> top
-                                                                            -1.0f,   1.0f);     // far -> near
+                                                                            -1.0f, 1.0f);     // far -> near
 
         // Default translation/position for object is 0, 0
         protected Particle _particle = new Particle(new Vector3(0.0f, 0.0f, 0.0f));
 
         public Shape()
         {
+            //_vertNum = 0;
             _color = (1.0f, 1.0f, 1.0f, 1.0f);
 
+            _vertexArray = new VertexArray();
+            _vertexBuffer = new VertexBuffer(GenerateBuffer(_positionsShape), _positionsShape.Count * sizeof(float));
+
+            _layout = new VertexBufferLayout();
+
+            // Add 2D positions to layout.
+            _layout.PushFloat(2);
+
+            _vertexArray.AddBuffer(_vertexBuffer, _layout);
+
+            _indexBuffer = new IndexBuffer(GenerateBuffer(_indicesShape), _indicesShape.Count);
+
+            _shader = new Shader("res/shaders/shader.vert", "res/shaders/shader.frag");
+            _shader.Bind();
+            _shader.SetUniformMat4("u_MVP", ref _mvp);
+
+            _vertexArray.Unbind();
+            _shader.Unbind();
+            _vertexBuffer.UnBind();
+            _indexBuffer.UnBind();
+        }
+
+        // HABAR N-AM CUM DRACU MERE ASTA, DA AIA E
+        private T[] GenerateBuffer<T>(List<T> list)
+        {
+            T[] buffer = new T[list.Count];
+            for (int i = 0; i < list.Count; i++)
+            {
+                buffer[i] = list[i];
+            }
+
+            return buffer;
         }
 
         public void Render()
@@ -73,6 +100,5 @@
             _trans = vec;
 
         }
->>>>>>> 64792c41a5bc49a5cd7085fa9b492251bdc0b3d7
     }
 }
