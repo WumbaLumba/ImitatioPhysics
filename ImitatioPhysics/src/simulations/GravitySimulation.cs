@@ -13,76 +13,14 @@ namespace ImitatioPhysics
         public bool Reset = false;
         public bool IsPaused = false;
 
-        private VertexBuffer _vertexBuffer;
-        private IndexBuffer _indexBuffer;
-        private VertexArray _vertexArray;
-        private VertexBufferLayout _layout;
 
-        private Shader _shader;
-        private Renderer _renderer = new Renderer();
-        //private Texture _texture;
-
-
-        Quad quad = new Quad();
+        Quad _quad = new Quad();
 
         private ShapesToRender _shapes = new ShapesToRender();
         
-
-        private static Particle _particle = new Particle(new OpenTK.Mathematics.Vector3(0.0f, 0.0f, 0.0f));
-
-        private float[] _positions = new float[]
-        {
-               0.0f,   0.0f,  // 0 bottom-left
-             100.0f,   0.0f,  // 1 bottom-right
-             100.0f, 100.0f,  // 2 top-right
-               0.0f, 100.0f,  // 3 top-left
-        };
-
-        private uint[] _indices = new uint[]
-        {
-            0, 1, 2,
-            2, 3, 0
-        };
-
-        private static OpenTK.Mathematics.Matrix4 _proj = 
-            OpenTK.Mathematics.Matrix4.CreateOrthographicOffCenter(0.0f, 960.0f,    // left -> right
-                                                                   0.0f, 540.0f,    // bottom -> top
-                                                                  -1.0f, 1.0f);     // far -> near
-
-        // Modify view to add camera here:
-        private static OpenTK.Mathematics.Matrix4 _view = OpenTK.Mathematics.Matrix4.CreateTranslation(0.0f, 0.0f, 0.0f);
-        private static OpenTK.Mathematics.Matrix4 _model = OpenTK.Mathematics.Matrix4.CreateTranslation(_particle.Position);
-        private static OpenTK.Mathematics.Matrix4 _mvp = _model * _view * _proj;
-
         public GravitySimulation() : base()
         {
-            _shapes.AddShape("q1", quad);
-
-            SquareColor = new Vector4(1.0f, 1.0f, 1.0f, 1.0f);
-            Position = new Vector3(0.0f, 0.0f, 0.0f);
-            Velocity = new Vector3(0.0f, 0.0f, 0.0f);
-
-            _vertexArray = new VertexArray();
-            _vertexBuffer = new VertexBuffer(_positions, _positions.Length * sizeof(float));
-
-            _layout = new VertexBufferLayout();
-
-            // Add 2D positions to layout.
-            _layout.PushFloat(2);
-
-            _vertexArray.AddBuffer(_vertexBuffer, _layout);
-
-            _indexBuffer = new IndexBuffer(_indices, _indices.Length);
-
-            _shader = new Shader("res/shaders/shader.vert", "res/shaders/shader.frag");
-            _shader.Bind();
-            _shader.SetUniformMat4("u_MVP", ref _mvp);
-
-            _vertexArray.Unbind();
-            _shader.Unbind();
-            _vertexBuffer.UnBind();
-            _indexBuffer.UnBind();
-
+            _shapes.AddShape("q1", _quad);
             
         }
 
@@ -90,8 +28,7 @@ namespace ImitatioPhysics
         {
             base.OnRender();
 
-            quad.Render();
-            quad.Move(_particle.Position);
+            _quad.Render();
         }
 
         public override void OnUpdate(float dt)
@@ -100,15 +37,14 @@ namespace ImitatioPhysics
 
             if (IsRunning)
             {
-                _particle.Update(0.001f);
-                _model = OpenTK.Mathematics.Matrix4.CreateTranslation(_particle.Position);
+                _quad.Move(dt);
             }
 
             else
             {
-                _particle.Position = (Position.X, Position.Y, Position.Z);
-                _particle.Velocity = (Velocity.X / 0.0002645833f, Velocity.Y / 0.0002645833f, Velocity.Z);
-                //_particle.Velocity = (0.0f, 0.0f, 0.0f);
+                _quad.SetPosition(new OpenTK.Mathematics.Vector3(Position.X, Position.Y, Position.Z));
+                _quad.SetPosition(new OpenTK.Mathematics.Vector3(Velocity.X / 0.0002645833f, Velocity.Y / 0.0002645833f, Velocity.Z));
+               
             }
         }
 
@@ -155,7 +91,7 @@ and run the simulation to let it drop.
 
             ImGui.Begin("Simulation Info");
             {
-                ImGui.Text("(VELOCITY)\nX: " + _particle.Velocity.X * 0.0002645833f + "\nY: " + _particle.Velocity.Y * 0.0002645833f);
+                ImGui.Text("(VELOCITY)\nX: " + _quad.GetVelocity().X * 0.0002645833f + "\nY: " + _quad.GetVelocity().Y * 0.0002645833f);
             }
             ImGui.End();
 

@@ -22,20 +22,21 @@ namespace ImitatioPhysics
         protected Shader _shader;
         protected Renderer _renderer = new Renderer();
 
+        // Default translation/position for object is 0, 0
+        protected static Particle _particle = new Particle(new Vector3(0.0f, 0.0f, 0.0f));
+
         protected static Matrix4 _view = Matrix4.CreateTranslation(0.0f, 0.0f, 0.0f);
-        protected static Matrix4 _model = Matrix4.CreateTranslation(_trans);
+        protected static Matrix4 _model = Matrix4.CreateTranslation(_particle.Position);
         protected static Matrix4 _mvp;
 
-        protected static Matrix4 _proj = Matrix4.CreateOrthographicOffCenter(0.0f, 960.0f,    // left -> right
-                                                                             0.0f, 540.0f,    // bottom -> top
-                                                                            -1.0f, 1.0f);     // far -> near
+        protected static Matrix4 _proj =
+            Matrix4.CreateOrthographicOffCenter(0.0f, 960.0f,    // left -> right
+                                                0.0f, 540.0f,    // bottom -> top
+                                               -1.0f,   1.0f);   // far -> near
 
-        // Default translation/position for object is 0, 0
-        protected Particle _particle = new Particle(new Vector3(0.0f, 0.0f, 0.0f));
-
+     
         public Shape()
         {
-            //_vertNum = 0;
             _color = (1.0f, 1.0f, 1.0f, 1.0f);
 
             _vertexArray = new VertexArray();
@@ -95,10 +96,17 @@ namespace ImitatioPhysics
             _color = color;
         }
 
-        public void Move(Vector3 vec)
+        public void Move(float dt)
         {
-            _trans = vec;
-
+            _particle.Update(dt);
         }
+
+        public Vector3 GetVelocity() => _particle.Velocity;
+
+        public Vector3 GetPosition() => _particle.Position;
+
+        public void SetVelocity(Vector3 vel) => _particle.Velocity = (vel.X, vel.Y, vel.Z);
+            
+        public void SetPosition(Vector3 pos) => _particle.Position = (pos.X, pos.Y, pos.Z);
     }
 }

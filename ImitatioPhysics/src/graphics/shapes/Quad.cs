@@ -2,7 +2,7 @@
 {
     class Quad : Shape
     {
-        // Specific to the quad class -> 4 vertices
+        // Specific to the quad class: 4 vertices
         protected float[] _positionsQuad = new float[]
         {
                0.0f,   0.0f,  // 0 bottom-left
@@ -19,6 +19,7 @@
 
         public Quad()
         {
+            // Add the vertices and indices to the shape. 
             _positionsShape.AddRange(_positionsQuad);
             _indicesShape.AddRange(_indicesQuad);
         }
