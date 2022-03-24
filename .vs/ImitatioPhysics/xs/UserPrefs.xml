@@ -1,10 +1,10 @@
 ﻿<Properties StartupConfiguration="{AFA6B9D0-6E31-41D1-B076-7BD978F7C756}|Default">
   <MonoDevelop.Ide.ItemProperties.ImitatioPhysics PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="ImitatioPhysics/src/graphics/shapes/Shape.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="ImitatioPhysics/src/simulations/GravitySimulation.cs">
     <Files>
+      <File FileName="ImitatioPhysics/src/simulations/GravitySimulation.cs" Line="21" Column="9" IsPinned="True" />
       <File FileName="ImitatioPhysics/src/simulations/Simulation.cs" />
       <File FileName="ImitatioPhysics/src/physics/Particle.cs" />
-      <File FileName="ImitatioPhysics/src/simulations/GravitySimulation.cs" Line="21" Column="9" />
       <File FileName="ImitatioPhysics/src/graphics/shapes/Triangle.cs" />
       <File FileName="ImitatioPhysics/src/graphics/shapes/ShapesToRender.cs" />
       <File FileName="ImitatioPhysics/src/graphics/shapes/Shape.cs" Line="106" Column="46" NotebookId="1" />
@@ -20,14 +20,14 @@
               <Node name="src" expanded="True">
                 <Node name="graphics" expanded="True">
                   <Node name="opengl" expanded="True" />
-                  <Node name="shapes" expanded="True">
-                    <Node name="Shape.cs" selected="True" />
-                  </Node>
+                  <Node name="shapes" expanded="True" />
                 </Node>
                 <Node name="imgui" expanded="True" />
                 <Node name="main" expanded="True" />
                 <Node name="physics" expanded="True" />
-                <Node name="simulations" expanded="True" />
+                <Node name="simulations" expanded="True">
+                  <Node name="GravitySimulation.cs" selected="True" />
+                </Node>
               </Node>
             </Node>
           </Node>
