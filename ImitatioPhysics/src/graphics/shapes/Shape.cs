@@ -7,48 +7,48 @@ namespace ImitatioPhysics
     {
         protected Vector4 _color;
 
-        protected static Vector3 _trans = (0.0f, 0.0f, 0.0f);
-
-        //protected int _vertNum;
-
         protected VertexBuffer _vertexBuffer;
         protected IndexBuffer _indexBuffer;
         protected VertexArray _vertexArray;
         protected VertexBufferLayout _layout;
 
-        protected List<float> _positionsShape = new List<float>();
-        protected List<uint> _indicesShape = new List<uint>();
-
         protected Shader _shader;
         protected Renderer _renderer = new Renderer();
 
-        // Default translation/position for object is 0, 0
+        protected List<float> _positionsShape = new List<float>();
+        protected List<uint> _indicesShape = new List<uint>();
+
+        // Default translation/position for object to (0, 0).
         protected static Particle _particle = new Particle(new Vector3(0.0f, 0.0f, 0.0f));
 
+        // Camera funcitonality to be implemented.
         protected static Matrix4 _view = Matrix4.CreateTranslation(0.0f, 0.0f, 0.0f);
-        protected static Matrix4 _model = Matrix4.CreateTranslation(_particle.Position);
-        protected static Matrix4 _mvp;
 
+        // Shape's appearence and movement is controlled with this.
+        protected static Matrix4 _model = Matrix4.CreateTranslation(_particle.Position);
+
+        // Adjust scale of shape for window size.
         protected static Matrix4 _proj =
             Matrix4.CreateOrthographicOffCenter(0.0f, 960.0f,    // left -> right
                                                 0.0f, 540.0f,    // bottom -> top
-                                               -1.0f,   1.0f);   // far -> near
+                                               -1.0f, 1.0f);     // far -> near
 
+        // Final matrix used to apply all transformations (model, view, projection).
+        protected static Matrix4 _mvp;
      
         public Shape()
         {
+            // Default to white.
             _color = (1.0f, 1.0f, 1.0f, 1.0f);
 
             _vertexArray = new VertexArray();
             _vertexBuffer = new VertexBuffer(GenerateBuffer(_positionsShape), _positionsShape.Count * sizeof(float));
-
             _layout = new VertexBufferLayout();
 
             // Add 2D positions to layout.
             _layout.PushFloat(2);
 
             _vertexArray.AddBuffer(_vertexBuffer, _layout);
-
             _indexBuffer = new IndexBuffer(GenerateBuffer(_indicesShape), _indicesShape.Count);
 
             _shader = new Shader("res/shaders/shader.vert", "res/shaders/shader.frag");
@@ -61,7 +61,7 @@ namespace ImitatioPhysics
             _indexBuffer.UnBind();
         }
 
-        // HABAR N-AM CUM DRACU MERE ASTA, DA AIA E
+        // Generic method for converting lists into buffers (arrays).
         private T[] GenerateBuffer<T>(List<T> list)
         {
             T[] buffer = new T[list.Count];
@@ -70,6 +70,7 @@ namespace ImitatioPhysics
                 buffer[i] = list[i];
             }
 
+            // Return array of specified T type.
             return buffer;
         }
 
@@ -77,7 +78,7 @@ namespace ImitatioPhysics
         {
             _shader.Bind();
 
-            _model = Matrix4.CreateTranslation(_trans);
+            _model = Matrix4.CreateTranslation(_particle.Position);
 
             _mvp = _model * _view * _proj;
 

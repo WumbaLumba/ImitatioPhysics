@@ -1,13 +1,14 @@
 ﻿<Properties StartupConfiguration="{AFA6B9D0-6E31-41D1-B076-7BD978F7C756}|Default">
   <MonoDevelop.Ide.ItemProperties.ImitatioPhysics PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="ImitatioPhysics/src/simulations/GravitySimulation.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="ImitatioPhysics/src/graphics/shapes/Quad.cs">
     <Files>
       <File FileName="ImitatioPhysics/src/simulations/GravitySimulation.cs" Line="21" Column="9" IsPinned="True" />
       <File FileName="ImitatioPhysics/src/simulations/Simulation.cs" />
-      <File FileName="ImitatioPhysics/src/physics/Particle.cs" />
+      <File FileName="ImitatioPhysics/src/physics/Particle.cs" Line="1" Column="1" />
       <File FileName="ImitatioPhysics/src/graphics/shapes/Triangle.cs" />
       <File FileName="ImitatioPhysics/src/graphics/shapes/ShapesToRender.cs" />
-      <File FileName="ImitatioPhysics/src/graphics/shapes/Shape.cs" Line="106" Column="46" NotebookId="1" />
+      <File FileName="ImitatioPhysics/src/graphics/shapes/Shape.cs" Line="64" Column="70" />
+      <File FileName="ImitatioPhysics/src/graphics/shapes/Quad.cs" Line="19" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -20,14 +21,14 @@
               <Node name="src" expanded="True">
                 <Node name="graphics" expanded="True">
                   <Node name="opengl" expanded="True" />
-                  <Node name="shapes" expanded="True" />
+                  <Node name="shapes" expanded="True">
+                    <Node name="Quad.cs" selected="True" />
+                  </Node>
                 </Node>
                 <Node name="imgui" expanded="True" />
                 <Node name="main" expanded="True" />
                 <Node name="physics" expanded="True" />
-                <Node name="simulations" expanded="True">
-                  <Node name="GravitySimulation.cs" selected="True" />
-                </Node>
+                <Node name="simulations" expanded="True" />
               </Node>
             </Node>
           </Node>
