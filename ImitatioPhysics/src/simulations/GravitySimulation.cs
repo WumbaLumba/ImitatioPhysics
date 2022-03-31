@@ -92,6 +92,7 @@ and run the simulation to let it drop.
             ImGui.Begin("Simulation Info");
             {
                 ImGui.Text("(VELOCITY)\nX: " + _quad.GetVelocity().X * 0.0002645833f + "\nY: " + _quad.GetVelocity().Y * 0.0002645833f);
+                ImGui.Text("Mass: " + _quad.GetMass() + " kg");
             }
             ImGui.End();
 

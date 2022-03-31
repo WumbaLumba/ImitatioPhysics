@@ -109,5 +109,7 @@ namespace ImitatioPhysics
         public void SetVelocity(Vector3 vel) => _particle.Velocity = (vel.X, vel.Y, vel.Z);
             
         public void SetPosition(Vector3 pos) => _particle.Position = (pos.X, pos.Y, pos.Z);
+
+        public float GetMass() => _particle.GetMass();
     }
 }
