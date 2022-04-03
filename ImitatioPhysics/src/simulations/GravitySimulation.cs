@@ -14,13 +14,14 @@ namespace ImitatioPhysics
         public bool IsPaused = false;
 
 
-        Quad _quad = new Quad();
+        Quad _quad;
 
-        private ShapesToRender _shapes = new ShapesToRender();
+        //private ShapesToRender _shapes = new ShapesToRender();
         
         public GravitySimulation() : base()
         {
-            _shapes.AddShape("q1", _quad);
+            //_shapes.AddShape("q1", _quad);
+            _quad = new Quad();
             
         }
 
