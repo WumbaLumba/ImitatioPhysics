@@ -34,7 +34,7 @@ namespace ImitatioPhysics
                                                -1.0f, 1.0f);     // far -> near
 
         // Final matrix used to apply all transformations (model, view, projection).
-        protected static Matrix4 _mvp;
+        protected static Matrix4 _mvp = _model * _view * _proj;
      
         public Shape()
         {
