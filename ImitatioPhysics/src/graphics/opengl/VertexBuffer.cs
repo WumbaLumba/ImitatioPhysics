@@ -7,17 +7,18 @@ namespace ImitatioPhysics
         // buffer handle
         private int _rendererID;
         
-        public VertexBuffer(float[] data, int size)
+        public VertexBuffer(int size)
         {
             _rendererID = GL.GenBuffer();
             Bind();
 
-            GL.BufferData(BufferTarget.ArrayBuffer, size, data, BufferUsageHint.DynamicDraw);
+            // Don't supply buffer with any data.
+            GL.BufferData(BufferTarget.ArrayBuffer, size, IntPtr.Zero, BufferUsageHint.DynamicDraw);
         }
 
-        public void UpdateData()
+        public void UpdateData(float[] data)
         {
-
+            GL.BufferSubData(BufferTarget.ArrayBuffer, IntPtr.Zero, data.Length * sizeof(float), data);
         }
 
         public void Bind()

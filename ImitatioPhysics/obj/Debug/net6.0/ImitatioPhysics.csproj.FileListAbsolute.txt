@@ -10,7 +10,6 @@ C:\Users\User\source\repos\ImitatioPhysics\ImitatioPhysics\bin\Debug\net6.0\Imit
 C:\Users\User\source\repos\ImitatioPhysics\ImitatioPhysics\bin\Debug\net6.0\ImitatioPhysics.deps.json
 C:\Users\User\source\repos\ImitatioPhysics\ImitatioPhysics\bin\Debug\net6.0\ImitatioPhysics.runtimeconfig.json
 C:\Users\User\source\repos\ImitatioPhysics\ImitatioPhysics\bin\Debug\net6.0\ImitatioPhysics.dll
-C:\Users\User\source\repos\ImitatioPhysics\ImitatioPhysics\bin\Debug\net6.0\ref\ImitatioPhysics.dll
 C:\Users\User\source\repos\ImitatioPhysics\ImitatioPhysics\bin\Debug\net6.0\ImitatioPhysics.pdb
 C:\Users\User\source\repos\ImitatioPhysics\ImitatioPhysics\bin\Debug\net6.0\ImGui.NET.dll
 C:\Users\User\source\repos\ImitatioPhysics\ImitatioPhysics\bin\Debug\net6.0\Microsoft.Win32.SystemEvents.dll
@@ -45,3 +44,5 @@ C:\Users\User\source\repos\ImitatioPhysics\ImitatioPhysics\obj\Debug\net6.0\Imit
 C:\Users\User\source\repos\ImitatioPhysics\ImitatioPhysics\obj\Debug\net6.0\ref\ImitatioPhysics.dll
 C:\Users\User\source\repos\ImitatioPhysics\ImitatioPhysics\obj\Debug\net6.0\ImitatioPhysics.pdb
 C:\Users\User\source\repos\ImitatioPhysics\ImitatioPhysics\obj\Debug\net6.0\ImitatioPhysics.genruntimeconfig.cache
+C:\Users\User\source\repos\ImitatioPhysics\ImitatioPhysics\obj\Debug\net6.0\ImitatioPhysics.csproj.AssemblyReference.cache
+C:\Users\User\source\repos\ImitatioPhysics\ImitatioPhysics\obj\Debug\net6.0\refint\ImitatioPhysics.dll

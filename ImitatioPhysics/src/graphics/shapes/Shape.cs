@@ -1,5 +1,4 @@
 ﻿using OpenTK.Mathematics;
-using System.Collections.Generic;
 
 namespace ImitatioPhysics
 {
@@ -21,7 +20,7 @@ namespace ImitatioPhysics
         // Default translation/position for object to (0, 0).
         protected static Particle _particle = new Particle(new Vector3(0.0f, 0.0f, 0.0f));
 
-        // Camera funcitonality to be implemented.
+        // Camera functionality to be implemented.
         protected static Matrix4 _view = Matrix4.CreateTranslation(0.0f, 0.0f, 0.0f);
 
         // Shape's appearence and movement is controlled with this.
@@ -35,14 +34,16 @@ namespace ImitatioPhysics
 
         // Final matrix used to apply all transformations (model, view, projection).
         protected static Matrix4 _mvp = _model * _view * _proj;
-     
+
         public Shape()
         {
-            // Default to white.
-            _color = (1.0f, 1.0f, 1.0f, 1.0f);
+            Create();
+        }
 
+        protected void Create()
+        {
             _vertexArray = new VertexArray();
-            _vertexBuffer = new VertexBuffer(GenerateBuffer(_positionsShape), _positionsShape.Count * sizeof(float));
+            //_vertexBuffer = new VertexBuffer(GenerateBuffer(_positionsShape), _positionsShape.Count * sizeof(float));
             _layout = new VertexBufferLayout();
 
             // Add 2D positions to layout.
@@ -59,6 +60,18 @@ namespace ImitatioPhysics
             _shader.Unbind();
             _vertexBuffer.UnBind();
             _indexBuffer.UnBind();
+        }
+
+        public string Info()
+        {
+            string info = "";
+            float[] x = GenerateBuffer(_positionsShape);
+            for (int i = 0; i < x.Length; i++)
+            {
+                info += x[i];
+            }
+            info += "\nLength:" + _positionsShape.Count;
+            return info;
         }
 
         // Generic method for converting lists into buffers (arrays).
@@ -100,6 +113,7 @@ namespace ImitatioPhysics
         public void Move(float dt)
         {
             _particle.Update(dt);
+            _model = Matrix4.CreateTranslation(_particle.Position);
         }
 
         public Vector3 GetVelocity() => _particle.Velocity;

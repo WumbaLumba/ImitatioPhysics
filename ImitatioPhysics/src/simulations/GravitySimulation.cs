@@ -5,7 +5,8 @@ namespace ImitatioPhysics
 {
     class GravitySimulation : Simulation
     {
-        public Vector4 SquareColor;
+        // Default to white
+        public Vector4 SquareColor = new Vector4(1.0f, 1.0f, 1.0f, 1.0f);
         public Vector3 Position;
         public Vector3 Velocity;
 
@@ -14,22 +15,35 @@ namespace ImitatioPhysics
         public bool IsPaused = false;
 
 
-        Quad _quad;
+        //Quad _quad;
+        //Triangle _triangle;
 
+        private Square _square;
         //private ShapesToRender _shapes = new ShapesToRender();
         
         public GravitySimulation() : base()
         {
             //_shapes.AddShape("q1", _quad);
-            _quad = new Quad();
-            
+            //_quad = new Quad();
+
+            //_triangle = new Triangle();
+
+            _square = new Square();
+
+            Position = new Vector3(0.0f, 0.0f, 0.0f);
+            Velocity = new Vector3(0.0f, 0.0f, 0.0f);;
         }
 
         public override void OnRender()
         {
             base.OnRender();
 
-            _quad.Render();
+            _square.ChangeColor((SquareColor.X, SquareColor.Y, SquareColor.Z, SquareColor.W));
+
+            _square.Render();
+
+            
+            //_triangle.Render();
         }
 
         public override void OnUpdate(float dt)
@@ -38,14 +52,13 @@ namespace ImitatioPhysics
 
             if (IsRunning)
             {
-                _quad.Move(dt);
+                _square.Move(dt);
             }
 
             else
             {
-                _quad.SetPosition(new OpenTK.Mathematics.Vector3(Position.X, Position.Y, Position.Z));
-                _quad.SetPosition(new OpenTK.Mathematics.Vector3(Velocity.X / 0.0002645833f, Velocity.Y / 0.0002645833f, Velocity.Z));
-               
+                _square.SetPosition(new OpenTK.Mathematics.Vector3(Position.X, Position.Y, Position.Z));
+                _square.SetVelocity(new OpenTK.Mathematics.Vector3(Velocity.X / 0.0002645833f, Velocity.Y / 0.0002645833f, Velocity.Z));
             }
         }
 
@@ -57,8 +70,6 @@ namespace ImitatioPhysics
                     IsRunning = ImGui.Button("Run");
                 else
                     IsRunning = !ImGui.Button("Restart");
-
-
             }
             ImGui.End();
 
@@ -66,7 +77,9 @@ namespace ImitatioPhysics
             {
                 ImGui.Text("Appearance");
                 ImGui.ColorEdit4("Background Colour", ref _clearColor);
+
                 ImGui.ColorEdit4("Square Colour", ref SquareColor);
+
                 if (!IsRunning)
                 {
                     ImGui.Text("\nInitial Position");
@@ -92,8 +105,7 @@ and run the simulation to let it drop.
 
             ImGui.Begin("Simulation Info");
             {
-                ImGui.Text("(VELOCITY)\nX: " + _quad.GetVelocity().X * 0.0002645833f + "\nY: " + _quad.GetVelocity().Y * 0.0002645833f);
-                ImGui.Text("Mass: " + _quad.GetMass() + " kg");
+                ImGui.Text("(VELOCITY1)\nX: " + _square.GetVelocity().X * 0.0002645833f + "\nY: " + _square.GetVelocity().Y * 0.0002645833f);
             }
             ImGui.End();
 
