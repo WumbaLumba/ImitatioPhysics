@@ -4,60 +4,82 @@ namespace ImitatioPhysics
 {
     class Square
     {
-        public Vector4 Color;
+        public System.Numerics.Vector4 Color = new System.Numerics.Vector4(1.0f, 1.0f, 1.0f, 1.0f);
 
         private float[] _vertices;
         private float _size;
 
-        // Default translation/position for object to (0, 0).
-        protected static Particle _particle = new Particle(new Vector3(0.0f, 0.0f, 0.0f));
+        private float _massReciprocal, _damping = 1.0f;
+        public Vector3 Position;
+        public Vector3 Velocity;
+        public Vector3 Acceleration;
+
+        private Vector3 _resAcceleration;
+
+        // Store value of all forces acting on the particle.
+        private Vector3 _forceAcc;
 
         public Square(float x, float y)
         {
+            Position = new Vector3(x, y, 0.0f);
             // Default color to white.
-            Color = new Vector4(1.0f, 1.0f, 1.0f, 1.0f);
-            _particle.Position = new Vector3(x, y, 0.0f);
+            Color = new System.Numerics.Vector4(1.0f, 1.0f, 1.0f, 1.0f);
+
+            Position = new Vector3(0.0f, 0.0f, 0.0f);
+            Velocity = (0.0f, 0.0f, 0.0f);
+
+            // Default acceleration to gravitational acceleration constant.
+            Acceleration = new Vector3(0.0f, -9.81f / 0.0002645833f, 0.0f);
+
+            // Deafult resulting force to 0.
+            _forceAcc = new Vector3(0.0f, 0.0f, 0.0f);
+
             // Default size to 100.
             _size = 100;
 
-            UpdateVertices();
+            _vertices = new float[8] {
+                x,         y,
+                x + _size, y,
+                x + _size, y + _size,
+                x,         y + _size
+            };
         }
 
         public void ChangeColor(Vector4 color)
         {
-            Color = color;
+            Color = new System.Numerics.Vector4(color.X, color.Y, color.Z, color.W);
         }
 
-        public void UpdateVertices()
+        public void SetMass(float mass)
         {
-            float x = _particle.Position.X;
-            float y = _particle.Position.Y;
-
-            _vertices = new float[24] {
-                x,         y,         Color.X, Color.Y, Color.Z, Color.W,
-                x + _size, y,         Color.X, Color.Y, Color.Z, Color.W,
-                x + _size, y + _size, Color.X, Color.Y, Color.Z, Color.W,
-                x,         y + _size, Color.X, Color.Y, Color.Z, Color.W
-            };
+            if (mass > 0.0f)
+                _massReciprocal = 1.0f / mass;
         }
-        public void Move(float dt)
+
+        public float GetMass() => 1 / _massReciprocal;
+
+        // Integrate initial velocity and acceleration to update current position and velocity.
+        public void Update(float dt)
         {
-            _particle.Update(dt);
-            UpdateVertices();
+            // Add acceleration due to forces other than gravity
+            _resAcceleration = Acceleration;
+
+            // This is in case the initial acceleration changes during update.
+            _resAcceleration += _massReciprocal * _forceAcc;
+
+            Position += (Velocity * _damping * dt) + (_resAcceleration * 0.5f * dt * dt);
+            Velocity += _resAcceleration * dt;
         }
 
-        public ref Particle ReturnRef() => ref _particle;
+        public void SetDamping(float damping)
+        {
+            if (damping > 0.0f && damping < 1.0f)
+                _damping = damping;
+        }
+
+        // Add force to the force accumulator.
+        public void AddForce(Vector3 force) => _forceAcc += force;
 
         public float[] GetVertices() => _vertices;
-
-        public Vector3 GetVelocity() => _particle.Velocity;
-
-        public Vector3 GetPosition() => _particle.Position;
-
-        public void SetVelocity(Vector3 vel) => _particle.Velocity = (vel.X, vel.Y, vel.Z);
-
-        public void SetPosition(Vector3 pos) => _particle.Position = (pos.X, pos.Y, pos.Z);
-
-        public float GetMass() => _particle.GetMass();
     }
 }

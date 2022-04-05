@@ -26,13 +26,6 @@ namespace ImitatioPhysics
         {
             base.OnRender();
             _shapes.Render();
-
-            //_square.ChangeColor((SquareColor.X, SquareColor.Y, SquareColor.Z, SquareColor.W));
-
-            //_square.Render();
-
-            
-            //_triangle.Render();
         }
 
         public override void OnUpdate(float dt)
@@ -41,11 +34,7 @@ namespace ImitatioPhysics
 
             if (IsRunning)
             {
-                //_square.Move(dt);
-                for(int i = 0; i < _shapes.GetListSquares().Count; i++)
-                {
-                    _shapes.GetListSquares()[i].Move(dt);
-                }
+                
             }
 
             /*
@@ -80,30 +69,27 @@ namespace ImitatioPhysics
 
                 if (!IsRunning)
                 {
-                    Vector3 position, velocity;
-                    Vector4 color;
-
                     for(int i = 0; i < _shapes.GetListSquares().Count; i++)
                     {
                         Square square = _shapes.GetListSquares()[i];
 
-                        position = new Vector3(square.GetPosition().X, square.GetPosition().Y, square.GetPosition().Z);
-                        velocity = new Vector3(square.GetVelocity().X, square.GetVelocity().Y, square.GetVelocity().Z);
-                        color = new Vector4(square.Color.X, square.Color.Y, square.Color.Z, square.Color.W);
+                        //position = new Vector3(square.GetPosition().X, square.GetPosition().Y, square.GetPosition().Z);
+                        //velocity = new Vector3(square.GetVelocity().X, square.GetVelocity().Y, square.GetVelocity().Z);
+                        //color = new Vector4(square.Color.X, square.Color.Y, square.Color.Z, square.Color.W);
                         
-                        ImGui.ColorEdit4("Square Colour", ref color);
+                        ImGui.ColorEdit4("Square Colour", ref square.Color);
 
-                        ImGui.Text($"\nInitial Position {i}");
-                        ImGui.SliderFloat($"(P{i}) X-axis", ref position.X, 0.0f, 860.0f);
-                        ImGui.SliderFloat($"(P{i}) Y-axis", ref position.Y, 0.0f, 440.0f);
+                        ImGui.Text($"\nInitial Position {i + 1}");
+                        ImGui.SliderFloat($"(P{i + 1}) X-axis", ref square.Position.X, 0.0f, 860.0f);
+                        ImGui.SliderFloat($"(P{i + 1}) Y-axis", ref square.Position.Y, 0.0f, 440.0f);
 
-                        ImGui.Text($"\nInitial Velocity {i}");
-                        ImGui.SliderFloat($"(V{i}) X-axis", ref velocity.X, -5.0f, 5.0f);
-                        ImGui.SliderFloat($"(V{i}) Y-axis", ref velocity.Y, -5.0f, 5.0f);
+                        ImGui.Text($"\nInitial Velocity {i + 1}");
+                        ImGui.SliderFloat($"(V{i + 1}) X-axis", ref square.Velocity.X, -5.0f, 5.0f);
+                        ImGui.SliderFloat($"(V{i + 1}) Y-axis", ref square.Velocity.Y, -5.0f, 5.0f);
 
-                        _shapes.GetListSquares()[i].ChangeColor((color.X, color.Y, color.Z, color.W));
-                        _shapes.GetListSquares()[i].SetPosition((position.X, position.Y, position.Z));
-                        _shapes.GetListSquares()[i].SetVelocity((velocity.X / 0.0002645833f, velocity.Y / 0.0002645833f, velocity.Z));
+                        //_shapes.GetListSquares()[i].ChangeColor((color.X, color.Y, color.Z, color.W));
+                        //_shapes.GetListSquares()[i].SetPosition((position.X, position.Y, position.Z));
+                        //_shapes.GetListSquares()[i].SetVelocity((velocity.X / 0.0002645833f, velocity.Y / 0.0002645833f, velocity.Z));
                     }
                 }
             }

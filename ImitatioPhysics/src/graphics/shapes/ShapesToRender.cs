@@ -57,21 +57,23 @@ namespace ImitatioPhysics
             _vertexArray = new VertexArray();
 
             // 2 position coord 4 color coord
-            _vertexBuffer = new VertexBuffer(6 * _maxVertexCount * sizeof(float));
+            _vertexBuffer = new VertexBuffer(2 * _maxVertexCount * sizeof(float));
             _layout = new VertexBufferLayout();
 
             // Add 2D positions to layout.
             _layout.PushFloat(2);
-
-            // Add colours to layout.
-            _layout.PushFloat(4);
 
             _vertexArray.AddBuffer(_vertexBuffer, _layout);
             _indexBuffer = new IndexBuffer(_indices, _indices.Length);
 
             _shader = new Shader("res/shaders/shader.vert", "res/shaders/shader.frag");
             _shader.Bind();
+            for (int i = 0; i < _squares.Count; i++)
+            {
+                _shader.SetUniform4("u_Color", _squares[i].Color.X, _squares[i].Color.Y, _squares[i].Color.Z, _squares[i].Color.W);
+            }
             _shader.SetUniformMat4("u_MVP", ref _mvp);
+            //_shader.SetUniform4("u_Color", ref _mvp);
 
             _vertexArray.Unbind();
             _shader.Unbind();
@@ -90,28 +92,28 @@ namespace ImitatioPhysics
         {
             for(int i = 0; i < _squares.Count; i++)
             {
-                _squares[i].UpdateVertices();
+                //_squares[i].UpdateVertices();
+                _model = Matrix4.CreateTranslation(_squares[i].Position.X, _squares[i].Position.X, 0.0f);
+                _mvp = _model * _view * _proj;
+
+                _shader.SetUniformMat4("u_MVP", ref _mvp);
+                _shader.SetUniform4("u_Color", _squares[i].Color.X, _squares[i].Color.Y, _squares[i].Color.Z, _squares[i].Color.W);
+                _vertexBuffer.Bind();
+                _vertexBuffer.UpdateData(_vertices);
+
+                _shader.Bind();
+
+                _vertexArray.Bind();
+
+                _indexBuffer.Bind();
+
+                // Draw object.
+                _renderer.Draw(ref _vertexArray, ref _indexBuffer, ref _shader);
+
+                _vertexArray.Unbind();
+                _indexBuffer.UnBind();
+                _shader.Unbind();
             }
-
-            _vertexBuffer.Bind();
-            _vertexBuffer.UpdateData(_vertices);
-
-            _shader.Bind();
-
-            _mvp = _model * _view * _proj;
-
-            _shader.SetUniformMat4("u_MVP", ref _mvp);
-
-            _vertexArray.Bind();
-
-            _indexBuffer.Bind();
-
-            // Draw object.
-            _renderer.Draw(ref _vertexArray, ref _indexBuffer, ref _shader);
-
-            _vertexArray.Unbind();
-            _indexBuffer.UnBind();
-            _shader.Unbind();
         }
 
         private T[] GenerateBuffer<T>(List<T> list)
