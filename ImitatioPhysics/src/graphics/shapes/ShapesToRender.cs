@@ -126,6 +126,6 @@ namespace ImitatioPhysics
             return buffer;
         }
 
-        public List<Square> GetListSquares() => _squares;
+        public ref List<Square> GetListSquares() => ref _squares;
     }
 }

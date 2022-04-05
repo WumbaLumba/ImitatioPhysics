@@ -87,19 +87,19 @@ namespace ImitatioPhysics
                     {
                         Square square = _shapes.GetListSquares()[i];
 
-                        position = new Vector3(0.0f, 0.0f, 0.0f);
-                        velocity = new Vector3(0.0f, 0.0f, 0.0f);
+                        position = new Vector3(square.GetPosition().X, square.GetPosition().Y, square.GetPosition().Z);
+                        velocity = new Vector3(square.GetVelocity().X, square.GetVelocity().Y, square.GetVelocity().Z);
                         color = new Vector4(square.Color.X, square.Color.Y, square.Color.Z, square.Color.W);
                         
                         ImGui.ColorEdit4("Square Colour", ref color);
 
-                        ImGui.Text("\nInitial Position");
-                        ImGui.SliderFloat("(P) X-axis", ref position.X, 0.0f, 860.0f);
-                        ImGui.SliderFloat("(P) Y-axis", ref position.Y, 0.0f, 440.0f);
+                        ImGui.Text($"\nInitial Position {i}");
+                        ImGui.SliderFloat($"(P{i}) X-axis", ref position.X, 0.0f, 860.0f);
+                        ImGui.SliderFloat($"(P{i}) Y-axis", ref position.Y, 0.0f, 440.0f);
 
-                        ImGui.Text("\nInitial Velocity");
-                        ImGui.SliderFloat("(V) X-axis", ref velocity.X, -5.0f, 5.0f);
-                        ImGui.SliderFloat("(V) Y-axis", ref velocity.Y, -5.0f, 5.0f);
+                        ImGui.Text($"\nInitial Velocity {i}");
+                        ImGui.SliderFloat($"(V{i}) X-axis", ref velocity.X, -5.0f, 5.0f);
+                        ImGui.SliderFloat($"(V{i}) Y-axis", ref velocity.Y, -5.0f, 5.0f);
 
                         _shapes.GetListSquares()[i].ChangeColor((color.X, color.Y, color.Z, color.W));
                         _shapes.GetListSquares()[i].SetPosition((position.X, position.Y, position.Z));
